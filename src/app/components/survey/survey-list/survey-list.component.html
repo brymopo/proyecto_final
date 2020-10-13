@@ -1,0 +1,39 @@
+<h1 class="text-success">
+    Mi Encuesta De Adopcion 
+</h1>
+    <div *ngIf='survey.length; else noSurvey'>
+        <ol>
+           <li *ngFor='let pair of survey[0].QandA'>
+               <p class="text-primary">
+                   <strong>
+                    {{ pair.question }}
+                   </strong>
+               </p>
+               <p>
+                    {{ pair.answer }}
+                </p>
+           </li>
+           
+        </ol>
+        <div *ngIf='isLoggedInUser()' class="d-flex justify-content-around my-2">
+            <button class="btn btn-outline-success" routerLink="../editar_encuesta">
+                Editar respuestas
+            </button>
+            <button class="btn btn-outline-danger" (click)='deleteSurvey()'>
+                Eliminar encuesta
+            </button>
+        </div>
+    </div>
+    <ng-template #noSurvey>
+        <div *ngIf='isLoggedInUser()' >
+            <p>
+                <strong>
+                    Aun no has llenado la encuesta de adopcion.
+                </strong>
+            </p>
+            <a class="btn btn-primary text-white" routerLink="../editar_encuesta">
+                Llenar la encuesta
+            </a>           
+        </div>        
+    </ng-template>
+    

@@ -1,0 +1,53 @@
+<div class="profile">
+
+    <div class="container-fluid" *ngIf='isLoggedIn();else login'>
+        <div class="row">
+            <div class="col-md-2 card">
+                <a class="h2 card-header text-white bg-info" routerLink="usuario">
+                    Hola {{ userInfo.firstName }}
+                </a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a class="text-primary" routerLink="editar">
+                            Actualizar Perfil
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="text-primary" routerLink="encuesta/loggedInUser">
+                            Encuesta
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="text-primary" routerLink='anuncios/mis_anuncios'>
+                            Mis Anuncios
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="">
+                            Mis Mensajes
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="text-primary" routerLink="mascotas/mis_mascotas">
+                            Mis Mascotas
+                        </a>
+                    </li>
+                    <li class="list-group-item" *ngIf='userInfo.admin' routerLink="admin/pannel">
+                        <a class="text-primary">
+                            Panel de Administrador
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10" *ngIf="isLoggedIn()">                
+                
+               <router-outlet></router-outlet>
+                
+            </div>
+        </div>
+    </div> 
+    <ng-template #login>
+        <h2>Debes iniciar sesion para poder ver esta seccion</h2>
+        <app-login></app-login>
+    </ng-template>   
+</div>

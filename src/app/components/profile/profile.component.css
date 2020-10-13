@@ -1,0 +1,14 @@
+.profile{
+    width: 95%;
+    margin: 25px auto;
+}
+
+div.container-fluid{
+    border:1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.col-md-2.card{
+    padding: 0%;
+}
+

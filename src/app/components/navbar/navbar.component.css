@@ -1,0 +1,15 @@
+.btn,
+a.nav-link.text-white{
+    font-size:1.5rem;
+}
+
+a.nav-link.text-white:hover{
+    color: #00c0de !important;
+
+}
+
+@media screen and (max-width:768px){
+    #mainNavBar{
+        background-color: rgba(0, 192, 222, 0.2);
+    }
+}

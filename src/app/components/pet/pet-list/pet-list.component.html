@@ -1,0 +1,38 @@
+<h1 class="text-success">
+    Mis Mascotas
+</h1>
+
+<div >
+    <div *ngIf='!pets.length'>
+        <p>
+            <strong>
+                Aun no has agregado ninguna mascota.
+            </strong>
+        </p>
+    </div>
+    <div *ngIf='pets.length' class="container row"> 
+        <div *ngFor='let pet of pets' class="col-4 my-2" >
+            <div class="card">
+                <img *ngIf='!pet.pictures.length' src="../../../assets/images/blank.png" alt="sin foto" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">
+                            {{ pet.name  }}
+                    </h5>
+                    <div class="d-flex row justify-content-around">
+                        <button class="btn btn-outline-success mr-1" routerLink="../editar/{{ pet._id }}">
+                                Editar
+                        </button>
+                        <button class="btn btn-danger" (click)='onDeletePet(pet._id)'>
+                                Eliminar
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>
+
+<button class="btn btn-info" routerLink="../editar">
+        Agrega una mascota
+</button>

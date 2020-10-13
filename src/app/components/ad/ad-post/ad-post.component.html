@@ -1,0 +1,38 @@
+<h1 *ngIf="mode==='create'" class="text-success">
+    Crear un anuncio
+</h1>
+
+<h1 *ngIf="mode==='edit'" class="text-success">
+    Editar un anuncio
+</h1>
+
+<form (submit)='onSubmit(adPost)' *ngIf='pets.length' #adPost="ngForm">
+    <div class="form-group">
+        <label for="petSelect">
+            Selecciona una mascota: 
+        </label>
+        <select name="petId" id="petSelect" ngModel class="form-control">
+            <option value="">-- Selecciona tu mascota </option>
+            <option *ngFor='let pet of pets' value='{{pet._id}}'>
+                {{ pet.name }}
+            </option>                       
+        </select> 
+    </div>   
+    <button class="btn btn-primary">
+        Crear anuncio
+    </button>
+    <button class="btn btn-warning" routerLink="../../mis_anuncios">
+        Cancelar
+    </button>
+</form>
+
+<div *ngIf='!pets.length'>
+    <p>
+        <strong>
+            Necesitas agregar mascotas primero para publicar un anuncio.
+        </strong>
+    </p>
+    <a routerLink="../../../mascotas/editar" class="btn btn-primary">
+        Agregar mascota
+    </a>
+</div>

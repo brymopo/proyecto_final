@@ -1,0 +1,113 @@
+<form  (submit)="onSubmit(petForm)" class="text-primary m-auto" #petForm='ngForm'>
+    <div class="text-center">
+        <h1 *ngIf='mode==="create"' class="text-success">Añadir mascota</h1>
+        <h1 *ngIf='mode==="edit"' class="text-success">Editar</h1>
+        <hr>
+    </div>
+    <div class="form-group">
+        <label for="name">
+            Nombre:
+        </label>
+        <input type="text" [ngModel]='pet.name' id="name" name="name" class="form-control">
+    </div>    
+    <div class="form-group">
+        <label for="breed">
+            Raza:
+        </label>
+        <input type="text" [ngModel]='pet.breed' id="breed" name="breed" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="species">
+            Especie:
+        </label>
+        <select [ngModel]='pet.species' name="species" id="species" class="form-control">
+            <option> -- Seleccionar -- </option>
+            <option value="cat">
+                Gato
+            </option>
+            <option value="dog">
+                Perro
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="gender">
+            Sexo:
+        </label>
+        <select name="gender" id="gender" class="form-control" [ngModel]='pet.gender'>
+            <option> -- Seleccionar -- </option>
+            <option value="male">
+                Macho
+            </option>
+            <option value="female">
+                Hembra
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="neutered">
+            Esterilizado?:
+        </label>        
+        <select name="neutered" id="neutered" class="form-control" [ngModel]='pet.neutered'>
+            <option> -- Seleccionar -- </option>
+            <option value="true">
+                Si
+            </option>
+            <option value="false">
+                No
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="vaccinated">
+            Vacunado?:
+        </label>
+        <select name="vaccinated" id="vaccinated" class="form-control" [ngModel]='pet.vaccinated'>
+            <option> -- Seleccionar -- </option>
+            <option value="true">
+                Si
+            </option>
+            <option value="false">
+                No
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="dob" class="col-12">
+            Fecha de Nacimiento (o edad aproximada):
+        </label>
+        <input type="date" name="dob" id="dob" [ngModel]='pet.dob'>       
+    </div>
+    <div class="form-group">
+        <label for="country">
+            Pais
+        </label>
+        <input type="text" id="country" name="country" class="form-control" [ngModel]='pet.country'>        
+    </div>
+    <div class="form-group">
+        <label for="city">
+            Ciudad
+        </label>
+        <input type="text" id="city" name="city" class="form-control" [ngModel]='pet.city'>         
+    </div>
+    <div class="form-group">
+        <label for="province">
+            Estado/Provincia
+        </label>
+        <input type="text" id="province" name="province" class="form-control" [ngModel]='pet.province'>        
+    </div>
+    <div class="form-group">
+        <label for="bio">
+            Cuentanos mas acerca de <span *ngIf="petForm.value.name;else noName">{{petForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
+        </label>
+        <textarea name="bio" id="bio" cols="30" rows="10" class="form-control" [ngModel]='pet.bio'></textarea>      
+    </div>    
+    <button class="btn btn-lg btn-primary mr-2">
+        <span *ngIf='mode==="create";else editPet'> Añadir mascota  </span>
+        <ng-template #editPet >Modificar mascota</ng-template> 
+    </button>
+    <a class="btn btn-lg btn-warning" [routerLink]="cancelLink">
+        Cancelar
+    </a>         
+</form>     
+

@@ -1,0 +1,21 @@
+#login{
+    background: linear-gradient(rgb(76, 74, 74),rgba(76, 74, 74, 0.2)), url("../../../assets/images/puppies-kittens.jpg");
+    background-size: cover;
+    background-position: center;    
+    display:flex;
+    flex-flow: column wrap;
+    align-items: center; 
+    justify-content: flex-end;
+    height: 80vh;          
+}
+
+#login>form{
+    border: 5px solid #fff;
+    background: #fff;
+    width: 90%;
+    max-width: 600px;      
+}
+
+#login{
+    justify-content: center;
+}

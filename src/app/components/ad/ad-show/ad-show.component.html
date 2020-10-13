@@ -1,0 +1,109 @@
+<h1 *ngIf='!ad._id' class="text-warning text-center">
+    No se pudo encontrar un anuncio con este ID. Por favor rectifica e intenta de nuevo
+</h1>
+<div *ngIf='ad._id'>
+    <div class="d-flex justify-content-between my-2">
+        <h1>{{ ad.pet.name }}</h1>
+        <button class="btn btn-outline-danger" *ngIf='!admin' (click)="onReport()">
+            Reportar Abuso
+        </button>
+        <button class="btn btn-danger"  *ngIf='admin' class="btn btn-danger" (click)="deleteByAdmin(ad._id)">
+            Eliminar por Admin
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <p>
+                <span>
+                    <strong>
+                        Especie: 
+                    </strong>
+                </span>
+                {{ ad.pet.species }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Raza: 
+                    </strong>
+                </span>
+                {{ ad.pet.breed }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Genero: 
+                    </strong>
+                </span>
+                {{ ad.pet.gender }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Fecha de nacimiento: 
+                    </strong>
+                </span>
+                {{ ad.pet.dob }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Esterelizado?: 
+                    </strong>
+                </span>
+                {{ ad.pet.neutered }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Vacunado?: 
+                    </strong>
+                </span>
+                {{ ad.pet.vaccinated }}
+            </p>
+            <p>
+                <span>
+                    <strong>
+                        Bio: 
+                    </strong>
+                </span>
+                {{ ad.pet.bio }}
+            </p>
+
+            <form>
+                <h3>
+                    Mensaje
+                </h3>
+                <textarea name="" id="" cols="30" rows="10" value="Porque quieres adoptar a {{ ad.pet.name}}?">
+                </textarea>
+                <button class="d-block btn btn-success">
+                    Quiero adoptar a {{ ad.pet.name }}
+                </button>
+            </form>
+        </div>        
+
+        <div class="col-sm">
+            <div *ngIf='ad.pet.pictures.length' id="carouselPet" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div *ngFor="let picture of ad.pet.pictures" class="carousel-item active">
+                        <img class="d-block w-100" src="picture.url" alt="First slide">
+                    </div>                   
+                </div>
+            </div>
+            <div *ngIf='!ad.pet.pictures.length'>
+                <img class="img-fluid" src="../../../../assets/images/blank.png" alt="noPicture">
+                <p>
+                    <strong> No hay foto</strong>
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<button class="btn btn-info" routerLink="../mis_anuncios">
+    Atras
+</button>
+<button *ngIf='admin' class="btn btn-info" routerLink="../../admin/pannel">
+    Volver a los anuncios reportados
+</button>
+
