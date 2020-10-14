@@ -10,20 +10,25 @@ import { Subscription } from 'rxjs';
 
 export class UserComponent implements OnInit, OnDestroy{
     public user:User;
+    
     private userDataSub = new Subscription();
+   
+
     constructor(private userService:UserService){
 
     }
 
-    ngOnInit(){
-        this.user = this.userService.copyUserInfo();
+    ngOnInit(){     
+
+        this.user = this.userService.copyUserInfo();            
+        
         this.userDataSub = this.userService.getUserDataObservable().subscribe((user:User)=>{
             this.user = user;
-        })
+        })        
     }
 
     ngOnDestroy(){
-        this.userDataSub.unsubscribe();
+        this.userDataSub.unsubscribe();        
     }
         
 }

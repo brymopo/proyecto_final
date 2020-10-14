@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { URL } from '../services/url';
+import { Common } from '../services/common';
 import { UserService } from './user.service';
 import { Pet } from '../models/pet';
 
@@ -12,7 +12,7 @@ export class PetService {
   
   constructor(private http:HttpClient,
               private userService:UserService,
-              private url:URL,
+              private common:Common,
               private _router:Router) { 
 
   }
@@ -26,7 +26,7 @@ export class PetService {
 
   createPet(form:Pet){    
 
-    let baseURL = this.url.base + '/pets/create';
+    let baseURL = this.common.getUrl('/pets/create');
 
     this.http.post<{success:Boolean,result:Pet[]}>(baseURL,form)
     .subscribe(res=>{
@@ -43,7 +43,7 @@ export class PetService {
     Makes a HTTP PUT request to update an existing pet in DB, captures the incoming data
     and sets pets property of the User object to this new value. 
     */
-    let updateURL = this.url.base+`/pets/${id}/update`;
+    let updateURL = this.common.getUrl(`/pets/${id}/update`);
 
     this.http.put<{success:Boolean,result:Pet}>(updateURL,form)
     .subscribe(res=>{
@@ -63,7 +63,7 @@ export class PetService {
    */
 
   deletePet(id:String){
-    let deleteURL = this.url.base + `/pets/${id}/delete`;
+    let deleteURL = this.common.getUrl(`/pets/${id}/delete`);
     
     this.http.delete<{success:Boolean,result:String}>(deleteURL)
     .subscribe(res=>{

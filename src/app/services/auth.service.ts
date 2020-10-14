@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL } from '../services/url';
+import { Common } from '../services/common';
 import { Router } from '@angular/router'
 import * as moment from 'moment';
 
@@ -25,7 +25,7 @@ export class AuthService implements OnInit{
 
     constructor(private http:HttpClient,
                 private router:Router,
-                private url:URL){
+                private common:Common){
 
     }
 
@@ -91,16 +91,18 @@ export class AuthService implements OnInit{
             password:form.password
         }
 
-        const loginURL = this.url.base + '/users/login';
+        const loginURL = this.common.getUrl('/users/login');
         
         this.http.post<{success:boolean,result:any}>(loginURL,loginData).subscribe(res=>{
             if(res.success){
                 this.loginFailed = "";
                 this.setLocalStorage(res.result);
                 this.isLoggedIn();
+                this.common.changeIsLoading(false);
                 this.router.navigateByUrl('mi_perfil');
             }
         },(err)=>{
+            this.common.changeIsLoading(false);
             this.loginFailed = err.error.result;
             this.router.navigateByUrl('iniciarsesion')            
         })
@@ -122,11 +124,13 @@ export class AuthService implements OnInit{
             phone:form.phone
         };
 
-        const signUpURL = this.url.base + '/users/new';
+        const signUpURL = this.common.getUrl('/users/new');
 
         this.http.post<{success:Boolean,result:any}>(signUpURL,newUser).subscribe(res=>{
             if(res.success){                
                 this.setLocalStorage(res.result);
+                this.common.changeIsLoading(false);
+                alert('El usuario se creo correctamente!')
                 this.router.navigateByUrl('');                
             };
         })

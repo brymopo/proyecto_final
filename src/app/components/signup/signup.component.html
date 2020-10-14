@@ -49,9 +49,11 @@
         <p class="text-danger" *ngIf='passwordMisMatch'>
             El texto ingresado no coincide con la contraseña. Por favor verifica e intenta de nuevo
         </p>            
-            <button class="btn btn-lg btn-primary">
+            <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
                 Crear cuenta
-            </button>        
+            </button>
+            <app-loading-button *ngIf='isLoading' [message]='"Creando cuenta"'></app-loading-button>      
+        
     </form>       
 
 </section>

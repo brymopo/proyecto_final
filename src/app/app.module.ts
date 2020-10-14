@@ -14,6 +14,7 @@ import { SurveyModule } from './modules/survey.module';
 import { PetModule } from './modules/pet.module';
 import { AdModule } from './modules/ad.module';
 import { AdminModule } from './modules/admin.module';
+import { AppWideModule } from './modules/app-wide.module';
 
 
 /* Routing Module Import */
@@ -37,8 +38,10 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { AdService } from './services/ad.service';
-import { URL } from './services/url';
+import { Common } from './services/common';
 import { AdminService } from './services/admin.service';
+
+
 
 
 
@@ -49,7 +52,7 @@ import { AdminService } from './services/admin.service';
     HeroComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent          
+    SignupComponent,             
   ],
   imports: [
     BrowserModule,       
@@ -62,7 +65,8 @@ import { AdminService } from './services/admin.service';
     SurveyModule,
     PetModule,
     AdModule,
-    AdminModule
+    AdminModule,
+    AppWideModule
   ],
   providers: [
     AuthService,
@@ -73,7 +77,7 @@ import { AdminService } from './services/admin.service';
     },
     UserService,
     AdService,
-    URL,
+    Common,
     AdminService
   ],
   bootstrap: [AppComponent]

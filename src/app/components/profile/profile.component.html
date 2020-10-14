@@ -1,4 +1,6 @@
-<div class="profile">   
+<app-loading *ngIf='isLoading'></app-loading >
+    
+<div *ngIf='!isLoading' class="profile">   
     <div class="container-fluid" *ngIf='isLoggedIn();else login'>
         <div class="row">
             <div class="col-md-2 card">

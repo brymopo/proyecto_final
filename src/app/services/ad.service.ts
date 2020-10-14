@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { Ad } from '../models/ad';
-import { URL } from '../services/url';
+import { Common } from '../services/common';
 import { Observable, Subject } from 'rxjs';
 import { Pet } from '../models/pet';
 
@@ -18,14 +18,14 @@ export class AdService{
     private allAdsSub = new Subject();      
     
     constructor(private http:HttpClient,
-                private url:URL,
+                private common:Common,
                 private userService:UserService,
                 private router:Router){
 
     }
 
     getOneAdPopulated(id:String){
-        let showOneUrl = this.url.base + `/ads/${id}`;
+        let showOneUrl = this.common.getUrl(`/ads/${id}`);
         return this.http.get<{success:Boolean,result:Ad}>(showOneUrl)
         .subscribe(res=>{
             if(res.success){
@@ -39,7 +39,7 @@ export class AdService{
     }
 
     getAllAds(){
-        let adsUrl = this.url.base + '/ads/show_all';
+        let adsUrl = this.common.getUrl('/ads/show_all');
         return this.http.get<{success:Boolean,result:Ad[]}>(adsUrl)
         .subscribe(res=>{
             this.allAdsSub.next(res.result);
@@ -51,7 +51,7 @@ export class AdService{
     }
 
     createAd(form:Pet){
-        let createUrl = this.url.base + '/ads/create';
+        let createUrl = this.common.getUrl('/ads/create');
         console.log(createUrl)
         this.http.post<{success:Boolean,result:Ad}>(createUrl,form)
         .subscribe(res=>{
@@ -70,7 +70,7 @@ export class AdService{
     }
 
     deleteAds(id:String){
-        const deleteUrl = this.url.base + `/ads/${id}/delete`;
+        const deleteUrl = this.common.getUrl(`/ads/${id}/delete`);
         this.http.delete<{success:Boolean,result:String}>(deleteUrl)
         .subscribe(res=>{
             if(res.success){

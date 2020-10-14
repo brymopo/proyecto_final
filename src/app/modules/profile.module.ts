@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppWideModule } from './app-wide.module';
 import { ProfileRoutingModule } from '../routing/profile-routing.module';
 import { FormsModule } from '@angular/forms';
 
@@ -17,7 +18,8 @@ import { UserPostComponent } from '../components/user/user-post/user-post.compon
     imports:[
         CommonModule,        
         FormsModule,
-        ProfileRoutingModule
+        ProfileRoutingModule,
+        AppWideModule
     ],
     exports:[
         ProfileComponent,

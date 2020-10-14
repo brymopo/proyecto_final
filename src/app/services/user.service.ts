@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL } from '../services/url';
+import { Common } from '../services/common';
 import { Subject } from 'rxjs';
 import { User } from '../models/user';
 
@@ -26,7 +26,7 @@ export class UserService implements OnInit{
     private base:String;
 
     constructor(private http:HttpClient,
-                private url:URL){
+                private common:Common){
 
     }
 
@@ -37,7 +37,7 @@ export class UserService implements OnInit{
 
     getUserData(){
         
-        const showURL = this.url.base + '/users/show';
+        const showURL = this.common.getUrl('/users/show');
 
         this.http.get<{success:Boolean,result:User}>(showURL)
         .subscribe(res=>{
@@ -93,7 +93,7 @@ export class UserService implements OnInit{
 
     updateUser(form){
         
-        const updateURL = this.url.base + '/users/update';
+        const updateURL = this.common.getUrl('/users/update');
         
         this.http.put<{success:Boolean,result:User}>(updateURL,form)
         .subscribe(res=>{

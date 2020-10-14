@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Admin } from '../models/admin';
 import { Ad } from '../models/ad';
-import { URL } from './url';
+import { Common } from './common';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 
@@ -14,12 +14,12 @@ export class AdminService{
     
     constructor(private http:HttpClient,
                 private userService:UserService,
-                private url:URL){
+                private common:Common){
 
     }    
 
     reportAd(id:String){
-        const reportUrl = this.url.base + `/admin/report_ad`;
+        const reportUrl = this.common.getUrl(`/admin/report_ad`);
         const body = {id:id}
         this.http.post<{success:Boolean}>(reportUrl,body)
         .subscribe(res=>{
@@ -35,7 +35,7 @@ export class AdminService{
     }
 
     deleteReportedAd(id:String){
-        const deleteUrl = this.url.base + `/admin/reported_ads/${id}/delete`;
+        const deleteUrl = this.common.getUrl(`/admin/reported_ads/${id}/delete`);
         this.http.delete<{success:Boolean,result:Ad[]}>(deleteUrl)
         .subscribe(res=>{
             if(res.success){

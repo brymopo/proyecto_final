@@ -1,5 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Common } from '../../services/common';
+import { Subscription } from 'rxjs';
+
 
 @Component({
     selector:'app-signup',
@@ -7,11 +10,14 @@ import { AuthService } from '../../services/auth.service';
     styleUrls:['./signup.component.css']
 })
 
-export class SignupComponent implements OnDestroy{
+export class SignupComponent implements OnInit, OnDestroy{
     
-    passwordMisMatch:Boolean=false;
+    public passwordMisMatch:Boolean;
+    public isLoading:Boolean;
+    private loadingSub = new Subscription();
 
-    constructor(public authService:AuthService){
+    constructor(public authService:AuthService,
+                private common:Common){
 
     }
 
@@ -27,11 +33,21 @@ export class SignupComponent implements OnDestroy{
         }
         
         console.log(form.value);
+        this.common.changeIsLoading(true);
         this.authService.signUp(form.value)
     }
 
+    ngOnInit(){
+        this.passwordMisMatch = false;
+        this.isLoading = false;
+        this.loadingSub = this.common.isLoadingAsObservable()
+        .subscribe((status:Boolean)=>{
+            this.isLoading = status;
+        })
+    }
+
     ngOnDestroy(){
-        
+        this.loadingSub.unsubscribe();
     }
 
 }

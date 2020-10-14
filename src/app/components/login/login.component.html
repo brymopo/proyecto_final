@@ -21,8 +21,10 @@
             </label>
             <input type="password" placeholder="*********" id="password" name="password" class="form-control col" required ngModel>
         </div>
-        <button class="btn btn-lg btn-primary">
+        <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
             Iniciar Sesion
         </button>
+        <app-loading-button *ngIf='isLoading' [message]='"Iniciando sesion"'></app-loading-button>      
     </form>
+    
 </section>

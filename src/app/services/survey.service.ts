@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { URL } from '../services/url';
+import { Common } from '../services/common';
 import { Subject } from 'rxjs';
 import { Survey } from '../models/survey';
 import { UserService } from './user.service';
@@ -37,7 +37,7 @@ export class SurveyService {
 
   constructor(private http:HttpClient,
               private userService:UserService,
-              private url:URL,
+              private common:Common,
               private router:Router
               ){ 
 
@@ -50,7 +50,7 @@ export class SurveyService {
 
   getSurveyQuestions(){
     
-    let getUrl = this.url.base + '/survey/questions/show'
+    let getUrl = this.common.getUrl('/survey/questions/show');
     this.http.get<{success:Boolean,result:String[]}>(getUrl)
     .subscribe(res=>{
       if(res.success){        
@@ -86,7 +86,7 @@ export class SurveyService {
 
   createSurvey(form){
     
-    let createUrl = this.url.base+'/survey/new'
+    let createUrl = this.common.getUrl('/survey/new');
 
     this.http.post<{success:Boolean,result:Survey}>(createUrl, form).subscribe(res=>{
       if(res.success){
@@ -109,7 +109,7 @@ export class SurveyService {
    */
 
   deleteSurvey(id:String){
-    const deleteUrl = this.url.base + `/survey/${id}/delete`;
+    const deleteUrl = this.common.getUrl(`/survey/${id}/delete`);
 
     this.http.delete<{success:Boolean,result:any}>(deleteUrl)
     .subscribe(res=>{
@@ -131,7 +131,7 @@ export class SurveyService {
    * @param survey - form containing the survey info to update
    */
   updateSurvey(id:String, survey){
-    const updateUrl = this.url.base + `/survey/${id}/update`
+    const updateUrl = this.common.getUrl(`/survey/${id}/update`);
 
     this.http.put<{success:Boolean,result:Survey}>(updateUrl,survey)
     .subscribe(res=>{
@@ -153,7 +153,7 @@ export class SurveyService {
    */
 
   showSurvey(){
-    let showUrl = this.url.base + `/survey/${this.surveyFeatured}`;
+    let showUrl = this.common.getUrl(`/survey/${this.surveyFeatured}`);
     
     this.http.get<{success:Boolean,result:Survey}>(showUrl)
     .subscribe(res=>{

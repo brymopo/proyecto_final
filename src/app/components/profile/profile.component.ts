@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
      * @property userInfo
      */
 
-    public userInfo:User;   
+    public userInfo:User;
+    public isLoading:Boolean;   
     private userSub = new Subscription();    
 
     constructor(private userService:UserService,
@@ -27,7 +28,9 @@ export class ProfileComponent implements OnInit,OnDestroy{
 
     }    
 
-    ngOnInit(){       
+    ngOnInit(){
+        this.isLoading = true;
+
         if(this.authService.isLoggedIn()){
             this.userInfo = new User();
             this.userService.getUserData();
@@ -35,6 +38,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
             .subscribe((user:User)=>{
                 this.userInfo = user;
                 console.log("user info changed: ",user);
+                this.isLoading = false;
                 this.router.navigateByUrl('mi_perfil/usuario');           
             })
         }
