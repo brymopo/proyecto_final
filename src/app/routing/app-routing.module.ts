@@ -29,7 +29,7 @@ const routes:Routes=[
         loadChildren:()=> import ('../modules/survey.module').then(m=>m.SurveyModule)
     },
     {
-        path:'anuncios_adopcion',
+        path:'anuncios',
         loadChildren: ()=> import ('../modules/ad.module').then(m=>m.AdModule)
     } 
 ]

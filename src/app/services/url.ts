@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class URL{
-    public base: String = "https://atpoda.herokuapp.com";
-    /* public base: String = "http://localhost:3000";       */
+    /* public base: String = "https://atpoda.herokuapp.com"; */
+    public base: String = "http://localhost:3000";      
 
 }

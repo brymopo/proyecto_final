@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { Ad } from '../models/ad';
 import { URL } from '../services/url';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Pet } from '../models/pet';
 
 @Injectable({
@@ -13,7 +13,9 @@ import { Pet } from '../models/pet';
 
 export class AdService{
     private ads:Ad[];
-    private adSub = new Subject();    
+    private allAds:Ad[];    
+    private adSub = new Subject();
+    private allAdsSub = new Subject();      
     
     constructor(private http:HttpClient,
                 private url:URL,
@@ -30,10 +32,22 @@ export class AdService{
                 this.adSub.next(res.result);
             }
         })
-    }
+    }    
 
     getOneAdAsObservable(){
         return this.adSub.asObservable();
+    }
+
+    getAllAds(){
+        let adsUrl = this.url.base + '/ads/show_all';
+        return this.http.get<{success:Boolean,result:Ad[]}>(adsUrl)
+        .subscribe(res=>{
+            this.allAdsSub.next(res.result);
+        })
+    }
+
+    getAllAdsAsObservable(){
+        return this.allAdsSub.asObservable()
     }
 
     createAd(form:Pet){
@@ -71,6 +85,7 @@ export class AdService{
         let userAds = this.userService.copyUserInfo().ads;
         let result  = userAds.filter(ad=>ad._id !== id);
         return result
-    }      
+    }   
+    
 
 }

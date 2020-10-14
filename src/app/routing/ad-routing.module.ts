@@ -8,22 +8,19 @@ import { AdShowComponent } from '../components/ad/ad-show/ad-show.component';
 const adRoutes:Routes = [
     {
         path:"",
-        children:[
-            {
-                path:'mis_anuncios',
-                component:AdListComponent                
-            },
+        children:[            
             {
                 path:'anuncios_form/:adId',
                 component:AdPostComponent
             },
-            /* {
-                path:'todos',
-            }, */
             {
-                path:':adId',
+                path:':mode',
+                component:AdListComponent                              
+            },
+            {
+                path:':mode/:adId',
                 component: AdShowComponent
-            }
+            }            
         ]
     }
 ];
