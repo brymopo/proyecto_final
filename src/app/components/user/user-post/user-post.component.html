@@ -35,7 +35,9 @@
         </label>
         <input type="number" [ngModel]="user.phone" id="phone" name="phone" class="form-control col" required>
     </div>    
-        <button class="btn btn-lg btn-primary">
+        <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
             Actualizar perfil
-        </button>        
+        </button>
+        <app-loading-button *ngIf='isLoading' [message]='"Actualizando perfil"'></app-loading-button>
+
 </form>       

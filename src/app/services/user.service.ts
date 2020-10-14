@@ -100,6 +100,7 @@ export class UserService implements OnInit{
             if(res.success){
                 this.userInfo = res.result;                
                 this.userDataEvent.next({...this.userInfo});
+                this.common.changeIsLoading(false);
                 alert('La operacion se completo exitosamente!')
             }
 
