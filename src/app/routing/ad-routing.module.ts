@@ -17,6 +17,9 @@ const adRoutes:Routes = [
                 path:'anuncios_form/:adId',
                 component:AdPostComponent
             },
+            /* {
+                path:'todos',
+            }, */
             {
                 path:':adId',
                 component: AdShowComponent
