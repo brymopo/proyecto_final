@@ -40,6 +40,7 @@ import { UserService } from './services/user.service';
 import { AdService } from './services/ad.service';
 import { Common } from './services/common';
 import { AdminService } from './services/admin.service';
+import { Page404Component } from './components/page404/page404.component';
 
 
 
@@ -52,7 +53,8 @@ import { AdminService } from './services/admin.service';
     HeroComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent,             
+    SignupComponent,
+    Page404Component,             
   ],
   imports: [
     BrowserModule,       

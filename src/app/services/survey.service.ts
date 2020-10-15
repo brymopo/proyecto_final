@@ -55,7 +55,7 @@ export class SurveyService {
     .subscribe(res=>{
       if(res.success){        
         this.questions = res.result;        
-        this.questionSub.next([...this.questions]);        
+        this.questionSub.next([...this.questions]);             
       }
     })
   }
@@ -90,7 +90,8 @@ export class SurveyService {
 
     this.http.post<{success:Boolean,result:Survey}>(createUrl, form).subscribe(res=>{
       if(res.success){
-        this.userService.updatedUserData('survey',[res.result]);        
+        this.userService.updatedUserData('survey',[res.result]);
+        this.common.buttonLoading = false;        
         alert('La encuesta fue creada correctamente!');
         this.router.navigateByUrl('mi_perfil/encuesta/loggedInUser');            
       }

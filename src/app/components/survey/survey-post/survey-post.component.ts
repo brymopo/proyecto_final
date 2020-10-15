@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SurveyService } from '../../../services/survey.service';
 import { UserService } from '../../../services/user.service';
+import { Common } from '../../../services/common';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
 
@@ -16,12 +17,15 @@ export class SurveyPostComponent implements OnInit, OnDestroy {
    */
   private userInfo:User;
   public hasSurvey:Boolean;
+  public isLoading:Boolean;
   public questions:String[];
   private subQuestions = new Subscription();
+  
 
 
   constructor(public surveyService: SurveyService,
-              private userService:UserService){
+              private userService:UserService,
+              public common:Common){
 
   }
 
@@ -31,6 +35,8 @@ export class SurveyPostComponent implements OnInit, OnDestroy {
    * @param form - form containing the info of the survey to create or update
    */
   onSubmit(form){
+    this.common.buttonLoading = true;
+
     if(!this.hasSurvey){
       this.surveyService.createSurvey(form.value);
     }else{      
@@ -39,14 +45,15 @@ export class SurveyPostComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(){
-    this.userInfo = this.userService.copyUserInfo();     
-    this.hasSurvey = Boolean(this.userInfo.survey.length);
-    
+    this.configBasicProperties();   
+
     if(!this.hasSurvey){
+      this.isLoading = true;
       this.surveyService.getSurveyQuestions();
       this.subQuestions = this.surveyService.getSurveyQuestionsObservable()
       .subscribe((questions:String[])=>{      
         this.questions = questions;
+        this.isLoading = false;
       })
     }    
       
@@ -55,7 +62,8 @@ export class SurveyPostComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     if(this.subQuestions){
       this.subQuestions.unsubscribe();
-    }    
+    };
+     
   } 
   
   /**
@@ -76,6 +84,14 @@ export class SurveyPostComponent implements OnInit, OnDestroy {
     }
     
     this.surveyService.updateSurvey(id,body);
+  }
+
+  configBasicProperties(){
+    this.userInfo = this.userService.copyUserInfo();     
+    this.hasSurvey = Boolean(this.userInfo.survey.length);
+    this.isLoading = false;
+    this.common.buttonLoading = false;
+    this.isLoading = false;
   }
 
 }

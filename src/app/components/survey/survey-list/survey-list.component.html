@@ -22,6 +22,7 @@
             <button class="btn btn-outline-danger" (click)='deleteSurvey()'>
                 Eliminar encuesta
             </button>
+            <app-loading-button [message]="'Eliminando encuesta'"></app-loading-button>
         </div>
     </div>
     <ng-template #noSurvey>

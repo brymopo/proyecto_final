@@ -23,8 +23,6 @@ export class UserService implements OnInit{
 
     private userDataEvent = new Subject();
 
-    private base:String;
-
     constructor(private http:HttpClient,
                 private common:Common){
 
@@ -45,6 +43,10 @@ export class UserService implements OnInit{
                 this.userInfo = res.result;
                 this.userDataEvent.next({...this.userInfo});
                 return res.result;
+            }
+        }, err=>{
+            if(err){
+                alert()
             }
         })
     }
@@ -99,8 +101,7 @@ export class UserService implements OnInit{
         .subscribe(res=>{
             if(res.success){
                 this.userInfo = res.result;                
-                this.userDataEvent.next({...this.userInfo});
-                this.common.changeIsLoading(false);
+                this.userDataEvent.next({...this.userInfo});                
                 alert('La operacion se completo exitosamente!')
             }
 

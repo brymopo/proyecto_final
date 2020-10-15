@@ -1,7 +1,7 @@
 <h1 *ngIf='!ad._id' class="text-warning text-center">
     No se pudo encontrar un anuncio con este ID. Por favor rectifica e intenta de nuevo
 </h1>
-<div *ngIf='ad._id'>
+<div *ngIf='ad._id' class="container">
     <div class="d-flex justify-content-between my-2">
         <h1>{{ ad.pet.name }}</h1>
         <button class="btn btn-outline-danger" *ngIf='!admin' (click)="onReport()">

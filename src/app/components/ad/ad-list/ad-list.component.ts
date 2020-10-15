@@ -4,7 +4,7 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { AdService } from '../../../services/ad.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
     selector:'app-ad-list',
@@ -20,7 +20,8 @@ export class AdListComponent implements OnInit, OnDestroy{
 
     constructor(private userService:UserService,
                 private adService:AdService,
-                private route:ActivatedRoute){
+                private route:ActivatedRoute,
+                private _router:Router){
 
     }
     
@@ -33,14 +34,15 @@ export class AdListComponent implements OnInit, OnDestroy{
                 .subscribe((user:User)=>{
                     this.ads = user.ads
                 })
-            };
-            if(this.mode==='todos'){
+            } else if(this.mode==='todos'){
                 this.adService.getAllAds();
                 this.adSub = this.adService.getAllAdsAsObservable()
                 .subscribe((ads:Ad[])=>{
                     this.ads = ads;
                     console.log(ads)
                 })
+            } else {
+                this._router.navigateByUrl('**');
             }
             
         })

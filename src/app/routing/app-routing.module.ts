@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeroComponent } from '../components/hero/hero.component';
 import { LoginComponent } from '../components/login/login.component';
 import { SignupComponent } from '../components/signup/signup.component';
+import { Page404Component } from '../components/page404/page404.component';
 
 
 
@@ -31,6 +32,10 @@ const routes:Routes=[
     {
         path:'anuncios',
         loadChildren: ()=> import ('../modules/ad.module').then(m=>m.AdModule)
+    },
+    {
+        path:'**',
+        component: Page404Component
     } 
 ]
 

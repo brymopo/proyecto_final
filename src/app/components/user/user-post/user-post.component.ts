@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { Common } from '../../../services/common';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
 
@@ -13,10 +12,9 @@ import { Subscription } from 'rxjs';
 export class UserPostComponent implements OnInit, OnDestroy{
     public user:User; 
     public isLoading:Boolean;   
-    private userDataSub = new Subscription();
-    private loadingSub = new Subscription();
-    constructor(private userService:UserService,
-                private common:Common){
+    private userDataSub = new Subscription();    
+
+    constructor(private userService:UserService){
 
     }
 
@@ -27,17 +25,11 @@ export class UserPostComponent implements OnInit, OnDestroy{
         this.userDataSub = this.userService.getUserDataObservable()
         .subscribe((user:User)=>{
             this.user = user;
-        });
-
-        this.loadingSub = this.common.isLoadingAsObservable()
-        .subscribe((status:Boolean)=>{
-            this.isLoading = status;
-        })
+        });        
     }
 
     ngOnDestroy(){
-        this.userDataSub.unsubscribe();
-        this.loadingSub.unsubscribe();
+        this.userDataSub.unsubscribe();        
     }
 
     updateUser(form){        
@@ -45,7 +37,7 @@ export class UserPostComponent implements OnInit, OnDestroy{
             alert('No pueden haber campos vacios')
             return;
         }
-        this.common.changeIsLoading(true);
+        this.isLoading = true;
         this.userService.updateUser(form.value);
     }
 
