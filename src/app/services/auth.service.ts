@@ -133,6 +133,9 @@ export class AuthService implements OnInit{
                 alert('El usuario se creo correctamente!')
                 this.router.navigateByUrl('');                
             };
+        },err=>{
+            this.common.changeIsLoading(false);
+            alert('Ocurrio un error: ' + err.message)
         })
     }    
 }
