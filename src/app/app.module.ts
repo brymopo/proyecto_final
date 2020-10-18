@@ -15,6 +15,7 @@ import { PetModule } from './modules/pet.module';
 import { AdModule } from './modules/ad.module';
 import { AdminModule } from './modules/admin.module';
 import { AppWideModule } from './modules/app-wide.module';
+import { ConversationModule } from './modules/conversation.module';
 
 
 /* Routing Module Import */
@@ -68,7 +69,8 @@ import { Page404Component } from './components/page404/page404.component';
     PetModule,
     AdModule,
     AdminModule,
-    AppWideModule
+    AppWideModule,
+    ConversationModule
   ],
   providers: [
     AuthService,

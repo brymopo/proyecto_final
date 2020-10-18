@@ -107,4 +107,9 @@ export class UserService implements OnInit{
 
         })
     }
+
+    destroyUser(){
+        this.userInfo = new User();
+        this.userDataEvent.next(this.userInfo);
+    }
 }

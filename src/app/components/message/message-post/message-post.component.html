@@ -1,0 +1,19 @@
+<form (submit)='onSubmit(newMessage)' #newMessage='ngForm'>
+    <h3>
+        Mensaje
+    </h3>
+        <div class="form-group" *ngIf='pet'>
+            <textarea name="content" id="" cols="30" rows="5" value="Porque quieres adoptar a {{ pet.name }}?" ngModel>
+            </textarea>
+            <button class="d-block btn btn-success">
+                Quiero adoptar a {{ pet.name }}         
+            </button>
+        </div>
+        <div class="form-group" *ngIf='!pet'>
+            <textarea name="content" id="" class="form-control" ngModel>
+            </textarea>
+            <button class="d-block btn btn-success">
+                Enviar        
+            </button>
+        </div>    
+</form>

@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Common } from '../services/common';
+import { UserService } from './user.service';
 import { Router } from '@angular/router'
 import * as moment from 'moment';
 
@@ -25,7 +26,8 @@ export class AuthService implements OnInit{
 
     constructor(private http:HttpClient,
                 private router:Router,
-                private common:Common){
+                private common:Common,
+                private userService:UserService){
 
     }
 
@@ -56,7 +58,8 @@ export class AuthService implements OnInit{
     logout(){
         localStorage.removeItem('token');
         localStorage.removeItem('expires');
-        this.isLoggedIn();
+        this.userService.destroyUser();
+        this.isLoggedIn();        
     }
 
     /**

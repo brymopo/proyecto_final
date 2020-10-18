@@ -11,7 +11,8 @@ export class User{
     phone:Number;    
     ads:Ad[];
     pets:Pet[];    
-    conversations:Conversation[];    
-    survey:Survey[] 
+    conversations:String[];    
+    survey:Survey[];
+    _id:String 
 }
  

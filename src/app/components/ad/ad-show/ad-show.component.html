@@ -70,16 +70,23 @@
                 {{ ad.pet.bio }}
             </p>
 
-            <form>
+            <app-message-post *ngIf='isLoggedIn() && !ownAd;else login' [pet]="ad.pet"></app-message-post>
+            <ng-template #login>
                 <h3>
-                    Mensaje
+                    Mensajes:
                 </h3>
-                <textarea name="" id="" cols="30" rows="10" value="Porque quieres adoptar a {{ ad.pet.name}}?">
-                </textarea>
-                <button class="d-block btn btn-success">
-                    Quiero adoptar a {{ ad.pet.name }}
-                </button>
-            </form>
+                <p *ngIf='!ownAd'>             
+                    <strong>
+                        * Debes iniciar sesion para poder enviar mensajes *
+                    </strong>
+                </p>
+                <p *ngIf='ownAd'>             
+                    <strong>
+                        * Tu publicaste este anuncio *
+                    </strong>
+                </p>
+            </ng-template>
+
         </div>        
 
         <div class="col-sm">

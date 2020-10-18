@@ -1,0 +1,27 @@
+<h1 class="text-success text-center m-1">Mis Mensajes</h1>
+
+
+<div class="m-auto container row">
+    <div id='left' class="col-4">
+        <ol *ngIf='conversations.length'>
+            <li *ngFor='let conversation of conversations'>
+                <a> 
+                    {{ Conversation }}
+                </a>
+            </li>
+        </ol>
+        <p *ngIf='!conversations.length'>
+            <strong>
+                No tienes mensajes en este momento
+            </strong>
+        </p>
+    </div>
+    <div id='right' class="col-8">
+        <!-- <div id='message-display'>
+            <div *ngFor='let message of messages'>
+                {{ message }}
+            </div>
+        </div> -->
+        <app-message-post></app-message-post>
+    </div>
+</div>

@@ -34,6 +34,10 @@ const profileRoutes:Routes = [
             {
                 path:'admin',
                 loadChildren: ()=> import ('../modules/admin.module').then(m=>m.AdminModule)
+            },
+            {
+                path:'mensajes',
+                loadChildren: ()=> import('../modules/conversation.module').then(m=>m.ConversationModule)
             }
             
         ]

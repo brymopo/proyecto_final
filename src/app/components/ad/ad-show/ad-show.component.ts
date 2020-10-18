@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Ad } from '../../../models/ad';
 import { AdService } from '../../../services/ad.service';
 import { AdminService } from '../../../services/admin.service';
+import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,12 +14,14 @@ import { Subscription } from 'rxjs';
 
 export class AdShowComponent implements OnInit, OnDestroy{ 
     public ad:Ad;
+    public ownAd:Boolean;
     private adSub = new Subscription();
     public admin:Boolean;
 
     constructor(private route:ActivatedRoute,
                 private adService:AdService,
-                private adminService:AdminService){
+                private adminService:AdminService,
+                private userService:UserService){
 
     }
 
@@ -32,6 +35,7 @@ export class AdShowComponent implements OnInit, OnDestroy{
             this.adSub = this.adService.getOneAdAsObservable()
             .subscribe((add:Ad)=>{
                 this.ad = add;
+                this.ownAd = this.isOwnAd(this.ad._id);
             })
         })
         
@@ -47,5 +51,16 @@ export class AdShowComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(){
         this.adSub.unsubscribe();
+    }
+
+    isLoggedIn(){
+        // Because an User object only exists if login is valid
+        return this.userService.copyUserInfo()._id;
+    }
+
+    isOwnAd(id:String){
+        let ads = this.userService.copyUserInfo().ads;
+        let result = ads.find(ad=>ad._id === id);                
+        return !!result
     }
 }
