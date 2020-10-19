@@ -1,1 +1,25 @@
-<h1>Conversation Show</h1>
+
+<section  *ngFor='let message of messages'>
+    <div *ngIf='isUser(message.author);else external' class="d-flex justify-content-end my-2">
+        <div class="bubble bg-success text-white my-1">
+            <p  class="text-right">
+                {{ message.content }}
+            </p>
+            <p class="small text-right">
+                {{ message.timestamp }}
+            </p>
+        </div>        
+    </div>
+    
+    <ng-template #external class="d-flex justify-content-start my-2">
+        <div class="bubble text-white bg-info my-1">
+            <p class="text-left">
+                {{ message.content }}
+            </p>
+            <p class="small text-left">
+                {{ message.timestamp }}
+            </p>
+        </div>        
+    </ng-template>
+    
+</section>

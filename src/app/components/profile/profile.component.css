@@ -17,4 +17,9 @@ div>.spinner-border.text-info {
     width: 25%;
     padding-top: 25%; /* 1:1 Aspect Ratio */
     position: relative; /* If you want text inside of it */
-  }
+}
+
+div.col-md-10{
+    max-height: 80vh;
+    overflow-y: scroll;
+}

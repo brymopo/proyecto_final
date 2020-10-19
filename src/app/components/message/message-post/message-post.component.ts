@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Pet } from '../../../models/pet';
 import { Message } from '../../../models/message';
+import { Conversation } from '../../../models/conversation';
 import { SocketioService } from '../../../services/socketio.service';
 
  
@@ -12,7 +13,7 @@ import { SocketioService } from '../../../services/socketio.service';
 
 export class MessagePostComponent implements OnInit, OnDestroy{
     @Input() pet:Pet;
-    public conversations:String[];
+    @Input() conversation:Conversation;    
     private authorID:String;
 
     constructor(private socketService:SocketioService){
@@ -22,25 +23,37 @@ export class MessagePostComponent implements OnInit, OnDestroy{
     ngOnInit(){
         console.log('on init message post')
         console.log(this.pet);
-        this.conversations = this.socketService.returnConversations();
-        this.socketService.setupSocketConnection(this.conversations);
-        this.authorID = this.socketService.returnAuthorID();  
-                   
+        this.authorID = this.socketService.returnAuthorID(); 
+        
+        if(this.socketService.socket){
+            console.log("There is already a socket connected!")
+        }
+
+        console.log('featured conv on init..',this.conversation)
+                           
     }
 
     ngOnDestroy(){
-        console.log('Start of onDestroy - message post');
-        this.socketService.socket.disconnect();
+        /* console.log('Start of onDestroy - message post');
+        this.socketService.socket.disconnect(); */
              
     }
 
     onSubmit(form){
         let message = new Message();
-        message.recepient = !form.value.recepient?this.pet.owner:form.value.recepient;
+        message.recepient = this.getRecepient() || this.pet.owner;
         message.content = form.value.content;
         message.timestamp = new Date();
-        message.conversation = !form.value.conversation?"":form.value.conversation;
+        message.conversation = !this.conversation ? "" : this.conversation._id;
 
-        this.socketService.sendMessage(message);
-    }    
+        this.socketService.sendMessage(message);        
+    } 
+    
+    getRecepient(){
+        if(!this.conversation){
+            return null;
+        }
+        let result = this.conversation.participants.filter(id=> id !== this.authorID);
+        return result[0];
+    }
 }

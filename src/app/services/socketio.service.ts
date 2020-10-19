@@ -11,9 +11,9 @@ export class SocketioService {
 
   constructor(private userService:UserService) { }
 
-  setupSocketConnection(conv:String[]){
+  setupSocketConnection(id:String){
     this.socket = io(environment.BASE_URL,{
-      query:{conversations:JSON.stringify(conv)}
+      query:{userId:id}
     });
     console.log(this.socket);
   }  

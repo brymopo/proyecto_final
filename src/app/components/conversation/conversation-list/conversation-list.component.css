@@ -1,4 +1,29 @@
 #left,
 #right{
     border:2px solid #e5e5e5;
+    height: 60vh;    
 }
+
+#output,
+#input{
+    width: 100%;    
+}
+
+#output{
+    height: 70%;    
+}
+
+#input{
+    height: 30%;
+}
+
+#left,
+#output{
+    overflow-y: scroll;  
+}
+
+
+
+
+
+

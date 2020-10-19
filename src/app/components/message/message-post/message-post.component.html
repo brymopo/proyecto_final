@@ -1,17 +1,20 @@
 <form (submit)='onSubmit(newMessage)' #newMessage='ngForm'>
-    <h3>
-        Mensaje
-    </h3>
+    <label for="message" class="d-block">
+        <strong>
+            Mensaje:
+        </strong>        
+    </label>    
         <div class="form-group" *ngIf='pet'>
-            <textarea name="content" id="" cols="30" rows="5" value="Porque quieres adoptar a {{ pet.name }}?" ngModel>
+            <textarea name="content" id="message" cols="30" rows="5" value="Porque quieres adoptar a {{ pet.name }}?" ngModel>
             </textarea>
             <button class="d-block btn btn-success">
                 Quiero adoptar a {{ pet.name }}         
             </button>
         </div>
         <div class="form-group" *ngIf='!pet'>
-            <textarea name="content" id="" class="form-control" ngModel>
-            </textarea>
+            <textarea name="content" id="message" class="form-control my-2" ngModel>
+            </textarea>        
+            
             <button class="d-block btn btn-success">
                 Enviar        
             </button>
