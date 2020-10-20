@@ -2,10 +2,11 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
+
 
 /*  Custom Modules imports */
 
@@ -42,6 +43,7 @@ import { AdService } from './services/ad.service';
 import { Common } from './services/common';
 import { AdminService } from './services/admin.service';
 import { Page404Component } from './components/page404/page404.component';
+import { TwoFAComponentComponent } from './components/two-facomponent/two-facomponent.component';
 
 
 
@@ -55,12 +57,14 @@ import { Page404Component } from './components/page404/page404.component';
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    Page404Component,             
+    Page404Component,
+    TwoFAComponentComponent,             
   ],
   imports: [
     BrowserModule,       
     FontAwesomeModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,     

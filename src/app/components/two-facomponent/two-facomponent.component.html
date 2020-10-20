@@ -1,0 +1,27 @@
+<section class="row container my-4">
+    <div class="col-6">
+        <img src="../../../assets/images/smartphone.png" alt="smartphone icon" class="img-fluid">
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-center">
+        <h1>Se envio un codigo a tu telefono</h1>
+        <p>
+            Hemos enviado un mensaje de texto al numero de telefono registrado con tu cuenta. Si no lo recibes pasados 5 minutos, por favor intenta nuevamente
+        </p>
+        <form [formGroup]="form2FA" (ngSubmit)="verifyCode()">
+            <div class="form-group">
+                <input formControlName="code" placeholder="Introduce el codigo" class="form-control">
+                <input type="hidden" formControlName="requestId">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-success">
+                    Validar Codigo
+                </button>
+                <a class="btn btn-info">
+                    Reenviar Codigo
+                </a>
+            </div>           
+        </form>
+    </div>
+    
+
+</section>

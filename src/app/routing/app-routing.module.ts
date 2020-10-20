@@ -5,6 +5,7 @@ import { HeroComponent } from '../components/hero/hero.component';
 import { LoginComponent } from '../components/login/login.component';
 import { SignupComponent } from '../components/signup/signup.component';
 import { Page404Component } from '../components/page404/page404.component';
+import { TwoFAComponentComponent } from '../components/two-facomponent/two-facomponent.component';
 
 
 
@@ -16,6 +17,10 @@ const routes:Routes=[
     {
         path:'iniciarsesion',
         component:LoginComponent
+    },
+    {
+        path:'iniciarsesion/2fa',
+        component: TwoFAComponentComponent
     },
     {
         path:'crearcuenta',
