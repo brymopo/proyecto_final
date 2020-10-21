@@ -30,7 +30,7 @@ export class TwoFAComponentComponent implements OnInit {
   }
 
   verifyCode(){
-    this.authService.validate2FA(this.form2FA.value);
+    // this.authService.validate2FA(this.form2FA.value);
   }
 
 }
