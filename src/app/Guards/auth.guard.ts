@@ -15,16 +15,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
 
   }
 
-  canActivate(
+  canActivate(    
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(this.AuthService.isLoggedIn()){
-      if(this.isAdmin){
-        
-      }else{
-        return true;
+      if(next.data.only==="Admin"){
+        return this.isAdmin();
       }
-      
+      return true;
     }   
     this.router.navigate(['iniciarsesion'])
   }
