@@ -23,14 +23,18 @@ export class TwoFAComponentComponent implements OnInit {
   }
 
   validator(){
+    const data =  JSON.parse(localStorage.getItem('loginInfo'));
+
     this.form2FA = this.formBuilder.group({
-      code:[" ",Validators.required],
-      requestId:localStorage.getItem('requestId')
+      code:["",Validators.required],
+      requestId:data.requestId,
+      userId:data.userId
     })
   }
 
   verifyCode(){
-    // this.authService.validate2FA(this.form2FA.value);
+    console.log(this.form2FA.value);
+    this.authService.validate2FA(this.form2FA.value);
   }
 
 }

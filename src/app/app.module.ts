@@ -44,6 +44,8 @@ import { Common } from './services/common';
 import { AdminService } from './services/admin.service';
 import { Page404Component } from './components/page404/page404.component';
 import { TwoFAComponentComponent } from './components/two-facomponent/two-facomponent.component';
+import { EmailValidateComponent } from './components/email/email-validate/email-validate.component';
+import { EmailVerifiedComponent } from './components/email/email-verified/email-verified.component';
 
 
 
@@ -58,7 +60,9 @@ import { TwoFAComponentComponent } from './components/two-facomponent/two-facomp
     LoginComponent,
     SignupComponent,
     Page404Component,
-    TwoFAComponentComponent,             
+    TwoFAComponentComponent,
+    EmailValidateComponent,
+    EmailVerifiedComponent,             
   ],
   imports: [
     BrowserModule,       

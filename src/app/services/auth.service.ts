@@ -98,11 +98,12 @@ export class AuthService implements OnInit{
         
         this.http.post<{success:boolean,result:any}>(loginURL,loginData).subscribe(res=>{
             if(res.success){
-                this.loginFailed = "";
+                /* this.loginFailed = "";
                 this.setLocalStorage(res.result);
                 this.isLoggedIn();
-                this.common.changeIsLoading(false);
-                this.router.navigateByUrl('mi_perfil');
+                this.common.changeIsLoading(false); */
+                localStorage.setItem('loginInfo',JSON.stringify(res.result));
+                this.router.navigateByUrl('iniciarsesion/2fa');
             }
         },(err)=>{
             this.common.changeIsLoading(false);
@@ -131,14 +132,41 @@ export class AuthService implements OnInit{
 
         this.http.post<{success:Boolean,result:any}>(signUpURL,newUser).subscribe(res=>{
             if(res.success){                
-                this.setLocalStorage(res.result);
+                // this.setLocalStorage(res.result);
                 this.common.changeIsLoading(false);
                 alert('El usuario se creo correctamente!')
-                this.router.navigateByUrl('');                
+                this.router.navigateByUrl('crearcuenta/validar_email');                
             };
         },err=>{
             this.common.changeIsLoading(false);
             alert('Ocurrio un error: ' + err.message)
         })
-    }    
+    }
+
+    validateEmail(token:string){
+        let url = this.common.getUrl(`/confirmation/${token}`);
+        this.http.get<{success:boolean,result:any}>(url)
+        .subscribe(res=>{
+            if(res.success){
+                this.setLocalStorage(res.result);
+                alert('Gracias, tu correo ha sido confirmado!')
+                this.router.navigateByUrl('mi_perfil');    
+            }
+        },err=>{
+            alert(`Oops, ocurrio un error: ${err.message}`);
+            this.router.navigateByUrl('/');    
+        })
+    }
+    
+    validate2FA(form){
+        let url = this.common.getUrl('/users/login/2fa');
+        this.http.post<{success:boolean,result:any}>(url,form).subscribe(res=>{
+                console.log('received',res.result);
+                this.loginFailed = "";
+                this.setLocalStorage(res.result);                
+                this.common.changeIsLoading(false);                
+                this.router.navigateByUrl('mi_perfil');
+                this.isLoggedIn();
+        })
+    }
 }
