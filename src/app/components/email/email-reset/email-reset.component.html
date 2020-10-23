@@ -1,0 +1,22 @@
+<section class="container-fluid d-flex flex-column justify-content-center">
+    
+    <div class="text-white container max-size">
+        <h1 class="text-center">
+            Reestablecer Clave
+        </h1>
+        <h3 class="text-left">
+            Introduce la direccion de correo electronico que usaste al momento de crear tu cuenta
+        </h3>
+    </div>    
+    <form (submit)='onSubmit(resetForm)' #resetForm='ngForm' class="container max-size">
+        <div class="form-group">
+            <label for="email" class="text-white">
+                Correo Electronico
+            </label>
+            <input type="email" name="email" id="email" required ngModel class="form-control">
+        </div>
+        <button class="btn btn-primary">
+            Enviar
+        </button>
+    </form>
+</section>

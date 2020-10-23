@@ -5,6 +5,7 @@ import { AdService } from '../../../services/ad.service';
 import { AdminService } from '../../../services/admin.service';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
+import * as moment from "moment";
 
 @Component({
     selector:'app-ad-show',
@@ -34,7 +35,7 @@ export class AdShowComponent implements OnInit, OnDestroy{
             this.adService.getOneAdPopulated(id);
             this.adSub = this.adService.getOneAdAsObservable()
             .subscribe((add:Ad)=>{
-                this.ad = add;
+                this.ad = add;                
                 this.ownAd = this.isOwnAd(this.ad._id);
             })
         })
@@ -62,5 +63,9 @@ export class AdShowComponent implements OnInit, OnDestroy{
         let ads = this.userService.copyUserInfo().ads;
         let result = ads.find(ad=>ad._id === id);                
         return !!result
+    }
+
+    formatDOB(){
+        return moment(this.ad.pet.dob).format('MM-DD-YYYY');
     }
 }

@@ -135,7 +135,7 @@ export class AuthService implements OnInit{
                 // this.setLocalStorage(res.result);
                 this.common.changeIsLoading(false);
                 alert('El usuario se creo correctamente!')
-                this.router.navigateByUrl('crearcuenta/validar_email');                
+                this.router.navigateByUrl('validar_email');                
             };
         },err=>{
             this.common.changeIsLoading(false);
@@ -167,6 +167,28 @@ export class AuthService implements OnInit{
                 this.common.changeIsLoading(false);                
                 this.router.navigateByUrl('mi_perfil');
                 this.isLoggedIn();
+        })
+    }
+
+    requestNewToken(form){
+        let url = this.common.getUrl('/users/sendResetToken');
+        this.http.post<{success:boolean,result:string}>(url,form)
+        .subscribe(res=>{
+            if(res.success){
+                this.router.navigateByUrl('validar_email');
+            }
+        })
+    }
+
+    resetPasswordWithToken(form,token){
+        let url = this.common.getUrl(`/users/reset_password/${token}`);
+        console.log('Sending to url: ',url);
+        this.http.post<{success:boolean,result:string}>(url,form)
+        .subscribe(res=>{
+            if(res.success){
+                alert('Clave reestablecida!');
+                this.router.navigateByUrl('iniciarsesion');
+            }
         })
     }
 }

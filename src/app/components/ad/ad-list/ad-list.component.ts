@@ -6,6 +6,7 @@ import { AdService } from '../../../services/ad.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
+
 @Component({
     selector:'app-ad-list',
     templateUrl:'./ad-list.component.html',

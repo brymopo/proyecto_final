@@ -10,6 +10,6 @@ export class EmailValidateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
+  }  
 
 }

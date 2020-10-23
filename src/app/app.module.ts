@@ -46,6 +46,8 @@ import { Page404Component } from './components/page404/page404.component';
 import { TwoFAComponentComponent } from './components/two-facomponent/two-facomponent.component';
 import { EmailValidateComponent } from './components/email/email-validate/email-validate.component';
 import { EmailVerifiedComponent } from './components/email/email-verified/email-verified.component';
+import { EmailResetComponent } from './components/email/email-reset/email-reset.component';
+import { ResetPasswordComponent } from './components/email/reset-password/reset-password.component';
 
 
 
@@ -62,7 +64,9 @@ import { EmailVerifiedComponent } from './components/email/email-verified/email-
     Page404Component,
     TwoFAComponentComponent,
     EmailValidateComponent,
-    EmailVerifiedComponent,             
+    EmailVerifiedComponent,
+    EmailResetComponent,
+    ResetPasswordComponent,             
   ],
   imports: [
     BrowserModule,       

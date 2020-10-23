@@ -1,0 +1,10 @@
+section{
+    background: linear-gradient(rgb(76, 74, 74),rgba(76, 74, 74, 0.2)), url("../../../../assets/images/puppies-kittens.jpg");
+    background-size: cover;
+    background-position: center;    
+    height:80vh;
+}
+
+.max-size{
+    max-width: 600px;
+}
