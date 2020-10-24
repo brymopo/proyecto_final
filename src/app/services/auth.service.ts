@@ -22,6 +22,8 @@ export class AuthService implements OnInit{
      */
 
     public loginFailed:String;
+
+    public rememberMe:boolean = true;
     
 
     constructor(private http:HttpClient,
@@ -89,11 +91,13 @@ export class AuthService implements OnInit{
      */
 
     login(form){
+        this.rememberMe = form.remember?true:false;
+        
         const loginData={
             username:form.username,
             password:form.password
         }
-
+        console.log('remember me: ', this.rememberMe);
         const loginURL = this.common.getUrl('/users/login');
         
         this.http.post<{success:boolean,result:any}>(loginURL,loginData).subscribe(res=>{
@@ -167,6 +171,17 @@ export class AuthService implements OnInit{
                 this.common.changeIsLoading(false);                
                 this.router.navigateByUrl('mi_perfil');
                 this.isLoggedIn();
+        })
+    }
+
+    resend2FACode(form){
+        let url = this.common.getUrl('/users/login/resend2fa');
+        this.http.post<{success:true,result:string}>(url,form).subscribe(res=>{
+            if(res.success){
+                alert('El codigo se ha reenviado');
+            }
+        },err=>{
+            alert(`Error: ${err.message}`);
         })
     }
 

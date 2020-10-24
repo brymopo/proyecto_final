@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     };
 
     onSubmit(form){
-        this.common.changeIsLoading(true);          
-        this.authService.login(form.value);        
+        this.common.changeIsLoading(true);                
+        this.authService.login(form.value);           
     }
 
     ngOnInit(){
@@ -34,5 +34,9 @@ export class LoginComponent implements OnInit, OnDestroy{
     ngOnDestroy(){
         this.authService.loginFailed = "";
         this.loadingSub.unsubscribe();
+    }
+
+    rememberMe(event){
+        console.log(event.target.value);
     }
 }

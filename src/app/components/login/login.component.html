@@ -21,14 +21,16 @@
             </label>
             <input type="password" placeholder="*********" id="password" name="password" class="form-control col" required ngModel>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <input type="checkbox" name="remember" id="remember" ngModel>
+            <label for="remember" class="mx-3 text-info">Recuerdame</label>
+        </div>        
             <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
                 Iniciar Sesion
             </button>
-            <a routerLink='./resetPassword'>
-                Reestablecer contraseña
-            </a>
-        </div>        
+            <a routerLink='./resetPassword' class="d-block my-3">
+                Reestablecer Contraseña
+            </a>              
         <app-loading-button *ngIf='isLoading' [message]='"Iniciando sesion"'></app-loading-button>      
     </form>
     

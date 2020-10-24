@@ -37,4 +37,8 @@ export class TwoFAComponentComponent implements OnInit {
     this.authService.validate2FA(this.form2FA.value);
   }
 
+  resendCode(){
+    this.authService.resend2FACode({requestId:this.form2FA.value.requestId});    
+  }
+
 }

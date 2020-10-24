@@ -33,4 +33,11 @@ export class ResetPasswordComponent implements OnInit {
     
   }
 
+  formHeaderText(){
+    if(!this.mode.length){
+      return 'Reestablecer Clave'
+    }
+    return 'Cambiar Clave'
+  }
+
 }
