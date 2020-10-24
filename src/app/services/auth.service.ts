@@ -191,4 +191,17 @@ export class AuthService implements OnInit{
             }
         })
     }
+
+    changePasswordBy2fa(form){
+        let url = this.common.getUrl('/users/password/change');
+        this.http.post<{success:boolean,result:any}>(url,form).subscribe(res=>{
+            if(res.success){
+                alert('Clave cambiada con exito');
+                this.router.navigateByUrl('mi_perfil');
+            }
+        },
+        err=>{
+            alert(err.message);
+        })
+    }
 }

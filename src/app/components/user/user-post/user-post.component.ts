@@ -41,4 +41,9 @@ export class UserPostComponent implements OnInit, OnDestroy{
         this.userService.updateUser(form.value);
     }
 
+    changePassword(){
+        this.isLoading = true;
+        this.userService.requestPasswordChangeCode();
+    }
+
 }

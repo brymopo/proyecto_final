@@ -1,5 +1,4 @@
 
-
 <form class="text-primary p-4 my-5" (submit)="updateUser(updateForm)" #updateForm='ngForm'>
     <div class="text-center">
         <h1 class="text-success">Actualizar mi perfil</h1>
@@ -34,7 +33,10 @@
             Telefono:
         </label>
         <input type="number" [ngModel]="user.phone" id="phone" name="phone" class="form-control col" required>
-    </div>    
+    </div>
+
+        <a class="h6 my-3 text-info d-block" (click)='changePassword()'> Para cambiar la clave, haz click aqui </a> 
+           
         <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
             Actualizar perfil
         </button>

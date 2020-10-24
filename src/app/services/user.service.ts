@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Common } from '../services/common';
 import { Subject } from 'rxjs';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn:'root'
@@ -24,7 +25,8 @@ export class UserService implements OnInit{
     private userDataEvent = new Subject();
 
     constructor(private http:HttpClient,
-                private common:Common){
+                private common:Common,
+                private router:Router){
 
     }
 
@@ -111,5 +113,16 @@ export class UserService implements OnInit{
     destroyUser(){
         this.userInfo = new User();
         this.userDataEvent.next(this.userInfo);
+    }
+
+    requestPasswordChangeCode(){
+        let url = this.common.getUrl('/users/password/change')
+        this.http.get<{success:boolean,result:any}>(url).subscribe(res=>{
+            if(res.success){
+                localStorage.setItem('loginInfo',JSON.stringify(res.result));
+                alert('El codigo se ha enviado exitosamente!');
+                this.router.navigateByUrl('mi_perfil/cambiar_clave');
+            }
+        });
     }
 }

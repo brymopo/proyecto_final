@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { UserComponent } from '../components/user/user.component';
 import { UserPostComponent } from '../components/user/user-post/user-post.component';
+import { ResetPasswordComponent } from '../components/email/reset-password/reset-password.component';
 
 
 const profileRoutes:Routes = [
@@ -18,6 +19,10 @@ const profileRoutes:Routes = [
             {
                 path:'editar',
                 component:UserPostComponent
+            },
+            {
+                path:'cambiar_clave',
+                component:ResetPasswordComponent
             },
             {
                 path:'encuesta',

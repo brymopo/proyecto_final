@@ -9,6 +9,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class ResetPasswordComponent implements OnInit {
   private token:string;
+  public mode:string = "";
 
   constructor(private route:ActivatedRoute,
               private authService:AuthService) { }
@@ -16,11 +17,20 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
       this.route.paramMap.subscribe((paramMap:ParamMap)=>{
         this.token = paramMap.get('token');
+        if(!this.token){
+          this.mode = 'change'
+        }
       })
   }
 
   onSubmit(form){
-    this.authService.resetPasswordWithToken(form.value,this.token);
+    if(!this.mode.length){
+      this.authService.resetPasswordWithToken(form.value,this.token);
+    }else{
+      form.value.requestId = JSON.parse(localStorage.getItem('loginInfo')).requestId;
+      this.authService.changePasswordBy2fa(form.value);
+    }
+    
   }
 
 }
