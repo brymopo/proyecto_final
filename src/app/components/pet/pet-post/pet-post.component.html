@@ -1,4 +1,4 @@
-<form  (submit)="onSubmit(petForm)" class="text-primary m-auto" #petForm='ngForm'>
+<form  (submit)="onSubmit()" class="text-primary m-auto" [formGroup]='petPostForm'>
     <div class="text-center">
         <h1 *ngIf='mode==="create"' class="text-success">Añadir mascota</h1>
         <h1 *ngIf='mode==="edit"' class="text-success">Editar</h1>
@@ -6,7 +6,7 @@
     </div>
     <div class="form-group">
         <label for="image">Imagen</label>
-        <input type="file" name="image" id="image" class="form-control" ngModel (change)='prepareImage($event)'>
+        <input type="file" formControlName="image" id="image" class="form-control" (change)='prepareImage($event)'>
         <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
         <img *ngIf='!previewURL' src='../../../../assets/images/blank.png' alt="preview" #image class="img-fluid">
     </div>
@@ -14,19 +14,19 @@
         <label for="name">
             Nombre:
         </label>
-        <input type="text" [ngModel]='pet.name' id="name" name="name" class="form-control">
+        <input type="text"  id="name" formControlName="name" class="form-control" [value]='petPostForm.value.name'>
     </div>    
     <div class="form-group">
         <label for="breed">
             Raza:
         </label>
-        <input type="text" [ngModel]='pet.breed' id="breed" name="breed" class="form-control" required>
+        <input type="text" id="breed" formControlName="breed" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="species">
             Especie:
         </label>
-        <select [ngModel]='pet.species' name="species" id="species" class="form-control">
+        <select formControlName="species" id="species" class="form-control">
             <option> -- Seleccionar -- </option>
             <option value="cat">
                 Gato
@@ -40,7 +40,7 @@
         <label for="gender">
             Sexo:
         </label>
-        <select name="gender" id="gender" class="form-control" [ngModel]='pet.gender'>
+        <select formControlName="gender" id="gender" class="form-control" >
             <option> -- Seleccionar -- </option>
             <option value="male">
                 Macho
@@ -54,7 +54,7 @@
         <label for="neutered">
             Esterilizado?:
         </label>        
-        <select name="neutered" id="neutered" class="form-control" [ngModel]='pet.neutered'>
+        <select formControlName="neutered" id="neutered" class="form-control">
             <option> -- Seleccionar -- </option>
             <option value="true">
                 Si
@@ -68,7 +68,7 @@
         <label for="vaccinated">
             Vacunado?:
         </label>
-        <select name="vaccinated" id="vaccinated" class="form-control" [ngModel]='pet.vaccinated'>
+        <select formControlName="vaccinated" id="vaccinated" class="form-control">
             <option> -- Seleccionar -- </option>
             <option value="true">
                 Si
@@ -82,31 +82,31 @@
         <label for="dob" class="col-12">
             Fecha de Nacimiento (o edad aproximada):
         </label>
-        <input type="date" name="dob" id="dob" [ngModel]='pet.dob' (change)="changeDOB($event)">       
+        <input type="date" formControlName="dob" id="dob">       
     </div>
     <div class="form-group">
         <label for="country">
             Pais
         </label>
-        <input type="text" id="country" name="country" class="form-control" [ngModel]='pet.country'>        
+        <input type="text" id="country" formControlName="country" class="form-control">        
     </div>
     <div class="form-group">
         <label for="city">
             Ciudad
         </label>
-        <input type="text" id="city" name="city" class="form-control" [ngModel]='pet.city'>         
+        <input type="text" id="city" formControlName="city" class="form-control">         
     </div>
     <div class="form-group">
         <label for="province">
             Estado/Provincia
         </label>
-        <input type="text" id="province" name="province" class="form-control" [ngModel]='pet.province'>        
+        <input type="text" id="province" formControlName="province" class="form-control">        
     </div>    
     <div class="form-group">
         <label for="bio">
-            Cuentanos mas acerca de <span *ngIf="petForm.value.name;else noName">{{petForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
+            Cuentanos mas acerca de <span *ngIf="petPostForm?.value.name;else noName">{{petPostForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
         </label>
-        <textarea name="bio" id="bio" cols="30" rows="10" class="form-control" [ngModel]='pet.bio'></textarea>      
+        <textarea formControlName="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>      
     </div>    
     <button class="btn btn-lg btn-primary mr-2">
         <span *ngIf='mode==="create";else editPet'> Añadir mascota  </span>

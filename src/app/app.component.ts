@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 
@@ -10,6 +11,7 @@ import { AuthService } from './services/auth.service';
 
 export class AppComponent {
   title = 'Atpoda - Adopta, no compres';
+  offline=false;
   @HostListener('window:unload',['$event'])
   unloadHandler(event){
     let rememberMe = this.authService.rememberMe;
@@ -18,7 +20,19 @@ export class AppComponent {
     }
   }
 
-  constructor(private authService:AuthService){
+   @HostListener('window:offline',['$event'])
+  offlineHandler(event){
+    this.offline = true;
+  }
+
+  @HostListener('window:online',['$event'])
+  onlineHandler(event){
+    this.offline = false;
+    console.log(event);
+  } 
+
+  constructor(private authService:AuthService,
+              private router:Router){
     
   }
   

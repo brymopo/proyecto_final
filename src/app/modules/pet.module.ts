@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PetRoutingModule } from '../routing/pet-routing.module';
 
 import { PetPostComponent } from '../components/pet/pet-post/pet-post.component';
@@ -14,7 +14,8 @@ import { PetListComponent } from '../components/pet/pet-list/pet-list.component'
     imports:[
         CommonModule,
         FormsModule,
-        PetRoutingModule
+        PetRoutingModule,
+        ReactiveFormsModule
     ],
     exports:[        
         PetPostComponent,

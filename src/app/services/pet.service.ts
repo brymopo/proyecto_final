@@ -45,7 +45,7 @@ export class PetService {
     */
     let updateURL = this.common.getUrl(`/pets/${id}/update`);
 
-    this.http.put<{success:Boolean,result:Pet}>(updateURL,form)
+    this.http.post<{success:Boolean,result:Pet}>(updateURL,form)
     .subscribe(res=>{
       if(res.success){
         let updatedPetsArray = this.afterUpdate(res.result);

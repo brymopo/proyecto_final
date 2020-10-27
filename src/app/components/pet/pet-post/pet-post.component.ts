@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PetService } from '../../../services/pet.service';
 import { Pet } from '../../../models/pet';
 import * as moment from 'moment';
@@ -30,16 +31,39 @@ export class PetPostComponent implements OnInit {
 
   public pet:Pet;
 
+  public petPostForm:FormGroup;
+
   public image:File;
 
   public previewURL:string|ArrayBuffer;
 
   constructor(private petService:PetService,
-              private route:ActivatedRoute){
+              private route:ActivatedRoute,
+              private formBuilder:FormBuilder){
+                console.log('constructor triggered.......')    
+                      
+  }
 
+  validator(pet){
+    
+    this.petPostForm = this.formBuilder.group({
+      species:[pet.species||'',Validators.required],
+      breed:[pet.breed||'',Validators.required],
+      name:[pet.name||'',Validators.required],
+      gender:[pet.gender||'',Validators.required],
+      dob:[pet.dob||'',Validators.required],  
+      neutered:[pet.neutered||false,Validators.required],
+      vaccinated:[pet.vaccinated||false,Validators.required],
+      bio:[pet.bio||'',Validators.required],
+      city:[pet.city||'',Validators.required],
+      province:[pet.province||'',Validators.required],
+      country:[pet.country||'',Validators.required],
+      image:[''],    
+    })
   }
 
   ngOnInit(){
+    console.log('on Init triggered.......')    
     this.route.paramMap
     .subscribe((paramMap:ParamMap)=>{
 
@@ -52,24 +76,25 @@ export class PetPostComponent implements OnInit {
         this.petId = paramMap.get('petId');
         this.pet = this.petService.getCopyPet(this.petId);
         this.pet.dob = moment(this.pet.dob).format('YYYY-MM-DD');
-        this.previewURL = this.pet.pictures[0];
-        
+        this.previewURL = this.pet.pictures[0];              
       }
-      console.log(this.mode);
+      this.validator(this.pet);
+      
     })
     
     this.cancelLink = this.getCancelLink();
     
   }  
 
-  onSubmit(form){
-    if(form.invalid){
+  onSubmit(){
+    
+    if(!this.petPostForm.valid){
       alert('Uno o mas campos estan vacios. Por favor rectifica e intenta de nuevo')
       return ;
     };
-
-    let formData = this.createFormData(form.value);    
-
+    
+    let formData = this.configFormData(this.petPostForm.value);    
+    
     if(this.mode==='create'){
       this.petService.createPet(formData);
     };
@@ -105,20 +130,28 @@ export class PetPostComponent implements OnInit {
     }
   }
   
-  createFormData(form){
-    const formData = new FormData();
+  configFormData(form){
+    let formData;
+    if(this.image){
+      formData = new FormData();
+      formData.append('image',this.image);
+      for (const key in form){      
+        formData.append(key,form[key]);
+      }
+    }else{
+      delete this.petPostForm.value['image'];
+      formData = this.petPostForm.value;
+    }
+
+    return formData;
+    /* const formData = new FormData();
     for (const key in form){      
       formData.append(key,form[key]);
     }
     if(this.image){
       formData.append('image',this.image);
     }
-    return formData;
-  }
-
-  changeDOB(event){
-    console.log(event.target.value);
-    console.log(typeof event.target.value);
-  }
+    return formData; */
+  }  
 
 }
