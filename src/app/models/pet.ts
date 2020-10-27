@@ -3,7 +3,7 @@ export class Pet{
     breed:String;
     name:String;
     gender:String;
-    dob:Date;    
+    dob:string;    
     neutered:Boolean;
     vaccinated:Boolean;
     bio:String;

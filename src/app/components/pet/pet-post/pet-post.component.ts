@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PetService } from '../../../services/pet.service';
 import { Pet } from '../../../models/pet';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pet-post',
@@ -50,6 +51,7 @@ export class PetPostComponent implements OnInit {
         this.mode = 'edit';
         this.petId = paramMap.get('petId');
         this.pet = this.petService.getCopyPet(this.petId);
+        this.pet.dob = moment(this.pet.dob).format('YYYY-MM-DD');
         this.previewURL = this.pet.pictures[0];
         
       }
@@ -105,19 +107,18 @@ export class PetPostComponent implements OnInit {
   
   createFormData(form){
     const formData = new FormData();
-    formData.append('name',form.name);
-    formData.append('image',this.image);
-    formData.append('breed',form.breed);
-    formData.append('species',form.species);
-    formData.append('gender',form.gender);
-    formData.append('neutered',form.neutered);
-    formData.append('vaccinated',form.vaccinated);
-    formData.append('country',form.country);
-    formData.append('city',form.city);
-    formData.append('province',form.province);
-    formData.append('bio',form.bio);
-    formData.append('dob',form.dob);
+    for (const key in form){      
+      formData.append(key,form[key]);
+    }
+    if(this.image){
+      formData.append('image',this.image);
+    }
     return formData;
+  }
+
+  changeDOB(event){
+    console.log(event.target.value);
+    console.log(typeof event.target.value);
   }
 
 }

@@ -5,6 +5,12 @@
         <hr>
     </div>
     <div class="form-group">
+        <label for="image">Imagen</label>
+        <input type="file" name="image" id="image" class="form-control" ngModel (change)='prepareImage($event)'>
+        <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
+        <img *ngIf='!previewURL' src='../../../../assets/images/blank.png' alt="preview" #image class="img-fluid">
+    </div>
+    <div class="form-group">
         <label for="name">
             Nombre:
         </label>
@@ -76,7 +82,7 @@
         <label for="dob" class="col-12">
             Fecha de Nacimiento (o edad aproximada):
         </label>
-        <input type="date" name="dob" id="dob" [ngModel]='pet.dob'>       
+        <input type="date" name="dob" id="dob" [ngModel]='pet.dob' (change)="changeDOB($event)">       
     </div>
     <div class="form-group">
         <label for="country">
@@ -95,12 +101,7 @@
             Estado/Provincia
         </label>
         <input type="text" id="province" name="province" class="form-control" [ngModel]='pet.province'>        
-    </div>
-    <div class="form-group">
-        <label for="image">Imagen</label>
-        <input type="file" name="image" id="image" class="form-control" ngModel (change)='prepareImage($event)'>
-        <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
-    </div>
+    </div>    
     <div class="form-group">
         <label for="bio">
             Cuentanos mas acerca de <span *ngIf="petForm.value.name;else noName">{{petForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
