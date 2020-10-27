@@ -97,6 +97,11 @@
         <input type="text" id="province" name="province" class="form-control" [ngModel]='pet.province'>        
     </div>
     <div class="form-group">
+        <label for="image">Imagen</label>
+        <input type="file" name="image" id="image" class="form-control" ngModel (change)='prepareImage($event)'>
+        <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
+    </div>
+    <div class="form-group">
         <label for="bio">
             Cuentanos mas acerca de <span *ngIf="petForm.value.name;else noName">{{petForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
         </label>

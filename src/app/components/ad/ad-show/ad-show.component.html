@@ -94,7 +94,7 @@
             <div *ngIf='ad.pet.pictures.length' id="carouselPet" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div *ngFor="let picture of ad.pet.pictures" class="carousel-item active">
-                        <img class="d-block w-100" src="picture.url" alt="First slide">
+                        <img class="d-block w-100" [src]="picture" alt="First slide">
                     </div>                   
                 </div>
             </div>

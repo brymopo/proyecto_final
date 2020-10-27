@@ -24,10 +24,10 @@ export class PetService {
     * @param {*} form => User-submitted form containing the info to create a new pet.
     */
 
-  createPet(form:Pet){    
+  createPet(form:FormData){    
 
     let baseURL = this.common.getUrl('/pets/create');
-
+    console.log('received form: ',form);
     this.http.post<{success:Boolean,result:Pet[]}>(baseURL,form)
     .subscribe(res=>{
       if(res.success){
@@ -38,7 +38,7 @@ export class PetService {
     })
   }
 
-  updatePet(id:String,form:Pet){
+  updatePet(id:String,form:FormData){
     /* 
     Makes a HTTP PUT request to update an existing pet in DB, captures the incoming data
     and sets pets property of the User object to this new value. 

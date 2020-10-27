@@ -10,7 +10,7 @@ export class Pet{
     city:String;
     province:String;
     country:String;
-    pictures:[];
+    pictures:File;
     videos:[];
     owner: String;
     _id:String

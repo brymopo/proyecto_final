@@ -29,6 +29,10 @@ export class PetPostComponent implements OnInit {
 
   public pet:Pet;
 
+  public image:File;
+
+  public previewURL:string|ArrayBuffer;
+
   constructor(private petService:PetService,
               private route:ActivatedRoute){
 
@@ -46,8 +50,10 @@ export class PetPostComponent implements OnInit {
         this.mode = 'edit';
         this.petId = paramMap.get('petId');
         this.pet = this.petService.getCopyPet(this.petId);
+        this.previewURL = this.pet.pictures[0];
         
       }
+      console.log(this.mode);
     })
     
     this.cancelLink = this.getCancelLink();
@@ -60,12 +66,14 @@ export class PetPostComponent implements OnInit {
       return ;
     };
 
+    let formData = this.createFormData(form.value);    
+
     if(this.mode==='create'){
-      this.petService.createPet(form.value);
+      this.petService.createPet(formData);
     };
 
     if(this.mode==='edit'){
-      this.petService.updatePet(this.petId,form.value);
+      this.petService.updatePet(this.petId,formData);
     };
     
   }
@@ -81,5 +89,35 @@ export class PetPostComponent implements OnInit {
 
     return this.mode==='create'?'../mis_mascotas':'../../mis_mascotas';
   }
+
+  prepareImage(event:any){
+    this.image = <File>event.target.files[0];
+    this.previewImage(this.image);    
+  }
+
+  previewImage(target){
+    let reader = new FileReader();
+    reader.readAsDataURL(target);
+    reader.onload = ()=>{
+      this.previewURL = reader.result;      
+    }
+  }
   
+  createFormData(form){
+    const formData = new FormData();
+    formData.append('name',form.name);
+    formData.append('image',this.image);
+    formData.append('breed',form.breed);
+    formData.append('species',form.species);
+    formData.append('gender',form.gender);
+    formData.append('neutered',form.neutered);
+    formData.append('vaccinated',form.vaccinated);
+    formData.append('country',form.country);
+    formData.append('city',form.city);
+    formData.append('province',form.province);
+    formData.append('bio',form.bio);
+    formData.append('dob',form.dob);
+    return formData;
+  }
+
 }
