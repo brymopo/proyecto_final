@@ -48,6 +48,7 @@ import { EmailValidateComponent } from './components/email/email-validate/email-
 import { EmailVerifiedComponent } from './components/email/email-verified/email-verified.component';
 import { EmailResetComponent } from './components/email/email-reset/email-reset.component';
 import { ResetPasswordComponent } from './components/email/reset-password/reset-password.component';
+import { OfflineComponent } from './components/offline/offline.component';
 
 
 
@@ -66,7 +67,8 @@ import { ResetPasswordComponent } from './components/email/reset-password/reset-
     EmailValidateComponent,
     EmailVerifiedComponent,
     EmailResetComponent,
-    ResetPasswordComponent,             
+    ResetPasswordComponent,
+    OfflineComponent,             
   ],
   imports: [
     BrowserModule,       

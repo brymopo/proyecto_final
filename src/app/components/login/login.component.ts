@@ -22,7 +22,8 @@ export class LoginComponent{
 
     onSubmit(){
         if(!this.loginForm.valid){
-            alert('Not valid...')
+            this.loginFailed = 'Se deben llenar todos los campos'
+            return;
         }        
         this.handleLogin(this.loginForm.value);             
     }

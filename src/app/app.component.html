@@ -2,7 +2,7 @@
 <router-outlet *ngIf='!offline;else disconnected'></router-outlet>
 <ng-template #disconnected>
     <section class="text-center">
-        <img src="../assets/images/offline.png" alt="offline" class="img-fluid">
+        <app-offline></app-offline>
         <h1 class="text-info">
             Parece que no tienes connexion a internet...
         </h1>

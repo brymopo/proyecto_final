@@ -119,7 +119,7 @@ export class UserService implements OnInit{
         let url = this.common.getUrl('/users/password/change')
         this.http.get<{success:boolean,result:any}>(url).subscribe(res=>{
             if(res.success){
-                localStorage.setItem('loginInfo',JSON.stringify(res.result));
+                localStorage.setItem('loginInfo',res.result);
                 alert('El codigo se ha enviado exitosamente!');
                 this.router.navigateByUrl('mi_perfil/cambiar_clave');
             }

@@ -141,62 +141,28 @@ export class AuthService implements OnInit{
     
     validate2FA(form){
         let url = this.common.getUrl('/users/login/2fa');
-        this.http.post<{success:boolean,result:any}>(url,form).subscribe(res=>{
-                console.log('received',res.result);
-                this.loginFailed = "";
-                this.setLocalStorage(res.result);                
-                this.common.changeIsLoading(false);                
-                this.router.navigateByUrl('mi_perfil');
-                this.isLoggedIn();
-        })
+        return this.http.post<{success:boolean,result:any}>(url,form)        
     }
 
     resend2FACode(form){
         let url = this.common.getUrl('/users/login/resend2fa');
-        this.http.post<{success:true,result:string}>(url,form).subscribe(res=>{
-            if(res.success){
-                alert('El codigo se ha reenviado');
-            }
-        },err=>{
-            alert(`Error: ${err.message}`);
-        })
+        return this.http.post<{success:true,result:string}>(url,form);        
     }
 
     requestNewToken(form){
         let url = this.common.getUrl('/users/sendResetToken');
         
-        return this.http.post<{success:boolean,result:string}>(url,form);
+        return this.http.post<{success:boolean,result:string}>(url,form);       
         
-        /* this.http.post<{success:boolean,result:string}>(url,form)
-        .subscribe(res=>{
-            if(res.success){
-                this.router.navigateByUrl('validar_email');
-            }
-        }) */
     }
 
-    resetPasswordWithToken(form,token){
+    resetPasswordByEmail(form,token){
         let url = this.common.getUrl(`/users/reset_password/${token}`);
-        console.log('Sending to url: ',url);
-        this.http.post<{success:boolean,result:string}>(url,form)
-        .subscribe(res=>{
-            if(res.success){
-                alert('Clave reestablecida!');
-                this.router.navigateByUrl('iniciarsesion');
-            }
-        })
+        return this.http.post<{success:boolean,result:string}>(url,form);        
     }
 
     changePasswordBy2fa(form){
         let url = this.common.getUrl('/users/password/change');
-        this.http.post<{success:boolean,result:any}>(url,form).subscribe(res=>{
-            if(res.success){
-                alert('Clave cambiada con exito');
-                this.router.navigateByUrl('mi_perfil');
-            }
-        },
-        err=>{
-            alert(err.message);
-        })
+        return this.http.post<{success:boolean,result:any}>(url,form);        
     }
 }
