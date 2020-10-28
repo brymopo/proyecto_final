@@ -1,10 +1,10 @@
 <section id="login">
     
-    <h4 class="text-danger bg-white p-3" *ngIf='authService.loginFailed'>
-        {{ authService.loginFailed}}
+    <h4 class="text-danger bg-white p-3" *ngIf='loginFailed'>
+        {{ loginFailed}}
     </h4>
 
-    <form class="p-4" (submit)='onSubmit(loginForm)' #loginForm='ngForm'>
+    <form class="p-4" (submit)='onSubmit()' [formGroup]='loginForm'>
         <div class="text-center">
             <h1>Inicia Sesion</h1>
             <hr>
@@ -13,16 +13,16 @@
             <label for="username" class="col">
                 Usuario:
             </label>
-            <input type="text" placeholder="Nombre de usuario" id="username" name="username" class="form-control col" required ngModel>
+            <input type="text" placeholder="Nombre de usuario" id="username" formControlName="username" class="form-control col">
         </div>
         <div class="form-group row">
             <label for="password" class="col">
                 Contraseña:
             </label>
-            <input type="password" placeholder="*********" id="password" name="password" class="form-control col" required ngModel>
+            <input type="password" placeholder="*********" id="password" formControlName="password" class="form-control col">
         </div>
         <div>
-            <input type="checkbox" name="remember" id="remember" ngModel>
+            <input type="checkbox" formControlName="remember" id="remember">
             <label for="remember" class="mx-3 text-info">Recuerdame</label>
         </div>        
             <button *ngIf='!isLoading' class="btn btn-lg btn-primary">

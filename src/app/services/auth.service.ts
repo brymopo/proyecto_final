@@ -91,29 +91,16 @@ export class AuthService implements OnInit{
      */
 
     login(form){
-        this.rememberMe = form.remember?true:false;
+        this.rememberMe = form.remember;
         
         const loginData={
             username:form.username,
             password:form.password
         }
-        console.log('remember me: ', this.rememberMe);
+        console.log('outgoing form: ',loginData);
         const loginURL = this.common.getUrl('/users/login');
         
-        this.http.post<{success:boolean,result:any}>(loginURL,loginData).subscribe(res=>{
-            if(res.success){
-                /* this.loginFailed = "";
-                this.setLocalStorage(res.result);
-                this.isLoggedIn();
-                this.common.changeIsLoading(false); */
-                localStorage.setItem('loginInfo',JSON.stringify(res.result));
-                this.router.navigateByUrl('iniciarsesion/2fa');
-            }
-        },(err)=>{
-            this.common.changeIsLoading(false);
-            this.loginFailed = err.error.result;
-            this.router.navigateByUrl('iniciarsesion')            
-        })
+        return this.http.post<{success:boolean,result:any}>(loginURL,loginData);
     };
 
     /**
