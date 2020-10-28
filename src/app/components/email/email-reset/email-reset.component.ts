@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 
@@ -9,14 +10,25 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./email-reset.component.css']
 })
 export class EmailResetComponent implements OnInit {
+  public isLoading = false;
+  public errorMessage="";
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form){
-    this.authService.requestNewToken(form.value);
+    this.isLoading = true;
+    this.authService.requestNewToken(form.value).subscribe(res=>{
+      if(res.success){
+          this.router.navigateByUrl('validar_email');
+      }
+    },err=>{
+      this.isLoading = false;
+      this.errorMessage = err.message;
+    });
   }
 
 }

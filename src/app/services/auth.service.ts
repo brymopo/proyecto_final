@@ -121,17 +121,7 @@ export class AuthService implements OnInit{
 
         const signUpURL = this.common.getUrl('/users/new');
 
-        this.http.post<{success:Boolean,result:any}>(signUpURL,newUser).subscribe(res=>{
-            if(res.success){                
-                // this.setLocalStorage(res.result);
-                this.common.changeIsLoading(false);
-                alert('El usuario se creo correctamente!')
-                this.router.navigateByUrl('validar_email');                
-            };
-        },err=>{
-            this.common.changeIsLoading(false);
-            alert('Ocurrio un error: ' + err.message)
-        })
+        return this.http.post<{success:Boolean,result:any}>(signUpURL,newUser);        
     }
 
     validateEmail(token:string){
@@ -174,12 +164,15 @@ export class AuthService implements OnInit{
 
     requestNewToken(form){
         let url = this.common.getUrl('/users/sendResetToken');
-        this.http.post<{success:boolean,result:string}>(url,form)
+        
+        return this.http.post<{success:boolean,result:string}>(url,form);
+        
+        /* this.http.post<{success:boolean,result:string}>(url,form)
         .subscribe(res=>{
             if(res.success){
                 this.router.navigateByUrl('validar_email');
             }
-        })
+        }) */
     }
 
     resetPasswordWithToken(form,token){

@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Common } from '../../services/common';
-import { Subscription } from 'rxjs';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,44 +10,72 @@ import { Subscription } from 'rxjs';
     styleUrls:['./signup.component.css']
 })
 
-export class SignupComponent implements OnInit, OnDestroy{
+export class SignupComponent{
+    public signUpForm:FormGroup;
+    public errorMessage = '';    
+    public isLoading=false;
     
-    public passwordMisMatch:Boolean;
-    public isLoading:Boolean;
-    private loadingSub = new Subscription();
 
     constructor(public authService:AuthService,
-                private common:Common){
-
+                private router:Router,
+                private formBuilder:FormBuilder){
+                    this.validator();
     }
 
-    isPasswordMatch(form){        
-        return form.value.password === form.value.passwordRepeat;        
-    };
+    validator(){
+        this.signUpForm =  this.formBuilder.group({
+            username:['',Validators.required],
+            firstName:['',Validators.required],
+            lastName:['',Validators.required],
+            email:['',[Validators.required, Validators.email]],
+            phone:['',[Validators.required,this.phoneValidator]],
+            password:['',[Validators.required, Validators.minLength(6)]],
+            passwordRepeat:['',Validators.required],
+        },{validators:this.passwordMatch})
+    }
 
-    onSignUp(form){              
-        this.passwordMisMatch = !this.isPasswordMatch(form);
+    phoneValidator(control:AbstractControl){
+        let phone = String(control.value);
+        if(phone.length !== 10){
+            return {badLength:true}
+        }
+        if(phone[0] !== "3"){
+            return {wrongPrefix:true}
+        }
+    }   
 
-        if(this.passwordMisMatch){            
-            return;
+    passwordMatch:ValidatorFn = (control:AbstractControl):ValidationErrors=>{
+        //Cross-field validator
+        let password = control.get('password');
+        let passwordRepeat = control.get('passwordRepeat');
+        
+        if( passwordRepeat.dirty && password.value !== passwordRepeat.value){
+            return {passwordMatch:true}
+        }
+    }
+
+    onSubmit(){
+        if(!this.signUpForm.valid){
+            this.errorMessage = 'Hay uno o mas errores en el formulario'
+            return; 
         }
         
-        console.log(form.value);
-        this.common.changeIsLoading(true);
-        this.authService.signUp(form.value)
-    }
+        this.isLoading = true;
 
-    ngOnInit(){
-        this.passwordMisMatch = false;
-        this.isLoading = false;
-        this.loadingSub = this.common.isLoadingAsObservable()
-        .subscribe((status:Boolean)=>{
-            this.isLoading = status;
+        this.handleSignUp(this.signUpForm.value);
+        
+    }
+    
+    handleSignUp(form){
+        this.errorMessage = "";
+        this.authService.signUp(form).subscribe(res=>{
+            if(res.success){                
+                this.router.navigateByUrl('validar_email');                
+            };
+        },err=>{
+            this.isLoading = false;
+            this.errorMessage = err.message;
         })
-    }
-
-    ngOnDestroy(){
-        this.loadingSub.unsubscribe();
     }
 
 }
