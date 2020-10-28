@@ -16,6 +16,7 @@ import * as moment from "moment";
 export class AdShowComponent implements OnInit, OnDestroy{ 
     public ad:Ad;
     public ownAd:Boolean;
+    public loading:boolean;
     private adSub = new Subscription();
     public admin:Boolean;
 
@@ -27,6 +28,7 @@ export class AdShowComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(){
+        this.loading = true;
         this.ad = new Ad();
         this.admin = this.adminService.isAdmin();
         this.route.paramMap
@@ -35,8 +37,12 @@ export class AdShowComponent implements OnInit, OnDestroy{
             this.adService.getOneAdPopulated(id);
             this.adSub = this.adService.getOneAdAsObservable()
             .subscribe((add:Ad)=>{
+                this.loading = false;
+                if(!add){
+                    return;
+                }
                 this.ad = add;                
-                this.ownAd = this.isOwnAd(this.ad._id);
+                this.ownAd = this.isOwnAd(this.ad._id);                
             })
         })
         

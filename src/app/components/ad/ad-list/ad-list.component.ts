@@ -15,6 +15,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 export class AdListComponent implements OnInit, OnDestroy{
     public ads:Ad[];
+    public loading:boolean;
     public mode:String;
     private userSub = new Subscription();
     private adSub = new Subscription();
@@ -27,19 +28,22 @@ export class AdListComponent implements OnInit, OnDestroy{
     }
     
     ngOnInit(){
+        this.loading = true;
         this.route.paramMap.subscribe((paramMap:ParamMap)=>{
             this.mode = paramMap.get('mode');
             if(this.mode==='mis_anuncios'){
                 this.ads = this.userService.copyUserInfo().ads;
+                this.loading=false;
                 this.userSub = this.userService.getUserDataObservable()
                 .subscribe((user:User)=>{
-                    this.ads = user.ads
+                    this.ads = user.ads;                    
                 })
             } else if(this.mode==='todos'){
                 this.adService.getAllAds();
                 this.adSub = this.adService.getAllAdsAsObservable()
                 .subscribe((ads:Ad[])=>{
                     this.ads = ads;
+                    this.loading=false;
                     console.log(ads)
                 })
             } else {

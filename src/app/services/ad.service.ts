@@ -28,8 +28,13 @@ export class AdService{
         let showOneUrl = this.common.getUrl(`/ads/${id}`);
         return this.http.get<{success:Boolean,result:Ad}>(showOneUrl)
         .subscribe(res=>{
+            console.log('response: ',res);
             if(res.success){
                 this.adSub.next(res.result);
+            }
+        },err=>{
+            if(err){
+                this.adSub.next(false);
             }
         })
     }    

@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container" *ngIf='!loading'>
     <h1 *ngIf='ownAds()' class="text-success">
         Mis Anuncios
     </h1>
@@ -39,3 +39,4 @@
         Agregar anuncio
     </button>
 </section>
+<app-loading *ngIf='loading'></app-loading>
