@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { PetService } from '../../../services/pet.service';
 import { UserService } from '../../../services/user.service';
 import { Pet } from '../../../models/pet';
@@ -10,9 +10,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './pet-list.component.html',
   styleUrls: ['./pet-list.component.css']
 })
-export class PetListComponent implements OnInit {
+export class PetListComponent implements OnInit, OnDestroy {
   
   public pets:Pet[];
+
+  public deleting = "";
+
+  public errorMessage = "";
 
   /**
   * Copy of the userInfo object of User Service; contains all user's data.
@@ -31,9 +35,25 @@ export class PetListComponent implements OnInit {
     })
   }
 
-  onDeletePet(id:String){
-    this.petService.deletePet(id);
-  } 
+  onDeletePet(id:string){
+    this.deleting = id;
+    this.petService.deletePet(id).subscribe(res=>{
+      if(res.success){
+        this.deleting = "";
+        let updatedPetsArray = this.petService.updateAfterDelete(res.result);
+        this.petService.updatePetsArray(updatedPetsArray);
+        this.petService._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
+      }
+    },err=>{
+      this.deleting = "";
+      this.errorMessage = err.error.result;
+      
+    });
+  }
+  
+  ngOnDestroy(){    
+    this.userSub.unsubscribe();
+  }
   
 }
 

@@ -28,6 +28,9 @@ export class SurveyListComponent implements OnInit, OnDestroy {
 
   private userSub = new Subscription();
   private surveySub = new Subscription();
+  public deleting = false;
+  public loading = true;
+  public errorMessage = "";
 
 
   constructor(private userService: UserService,
@@ -45,7 +48,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
         if(surveyId==='loggedInUser'){
           
           this.survey = this.userService.copyUserInfo().survey;
-
+          this.loading = false;
           this.userSub = this.userService
           .getUserDataObservable()
           .subscribe((user:User) => {          
@@ -55,6 +58,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
           
           this.surveyService.showSurvey();
           this.survey = this.surveyService.copySurvey();
+          this.loading = false;
           this.surveySub = this.surveyService.getSurveyAsObservable()
           .subscribe((survey:Survey)=>{
             this.survey = [survey];            
@@ -75,8 +79,18 @@ export class SurveyListComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteSurvey() {    
-    this.surveyService.deleteSurvey(this.survey[0]._id);
+  deleteSurvey() { 
+    this.deleting = true;   
+    this.surveyService.deleteSurvey(this.survey[0]._id).subscribe(res=>{
+      if(res.success){
+        this.deleting = false;
+        this.userService.updatedUserData('survey',[]);
+        this.surveyService.router.navigateByUrl('mi_perfil/encuesta/loggedInUser');      
+      }
+    },err=>{
+      this.deleting = false;
+      this.errorMessage = err.error.result;      
+    });
   }
 
   /**

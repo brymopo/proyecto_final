@@ -16,6 +16,8 @@ import { Subscription } from 'rxjs';
 
 export class AdPostComponent implements OnInit, OnDestroy{    
     public ad:Ad;
+    public loading=false;
+    public errorMessage="";
     public mode:String;
     public pets:Pet[];
     private userSub = new Subscription();
@@ -54,7 +56,17 @@ export class AdPostComponent implements OnInit, OnDestroy{
     }
 
     onSubmit(form){
-        const body = this.pets.find(p=>p._id===form.value.petId)
-        this.adService.createAd(body);
+        const body = this.pets.find(p=>p._id===form.value.petId);
+        this.loading = true;
+        this.adService.createAd(body).subscribe(res=>{
+            if(res.success){
+                this.loading = false;
+                this.adService.updateAds(res.result);
+                this.adService.router.navigateByUrl('/mi_perfil/anuncios/mis_anuncios');                
+            }
+        },err=>{
+            this.loading = false;
+            this.errorMessage = err.error.result;            
+        });
     }
 }

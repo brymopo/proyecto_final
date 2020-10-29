@@ -17,13 +17,19 @@
                 {{ pet.name }}
             </option>                       
         </select> 
+    </div>
+    <div class="d-flex justify-content-around">
+        <button class="btn btn-primary" *ngIf='!loading'>
+            Crear anuncio
+        </button>
+        <app-loading-button *ngIf='loading' [message]="'Creando anuncio...'"></app-loading-button>
+        <button class="btn btn-warning" routerLink="../../mis_anuncios">
+            Cancelar
+        </button>
     </div>   
-    <button class="btn btn-primary">
-        Crear anuncio
-    </button>
-    <button class="btn btn-warning" routerLink="../../mis_anuncios">
-        Cancelar
-    </button>
+    <p class="text-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </p>
 </form>
 
 <div *ngIf='!pets.length'>

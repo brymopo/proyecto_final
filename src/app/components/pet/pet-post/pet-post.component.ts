@@ -37,6 +37,10 @@ export class PetPostComponent implements OnInit {
 
   public previewURL:string|ArrayBuffer;
 
+  public loading = false;
+
+  public errorMessage = "";
+
   constructor(private petService:PetService,
               private route:ActivatedRoute,
               private formBuilder:FormBuilder){
@@ -63,7 +67,7 @@ export class PetPostComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('on Init triggered.......')    
+       
     this.route.paramMap
     .subscribe((paramMap:ParamMap)=>{
 
@@ -92,15 +96,15 @@ export class PetPostComponent implements OnInit {
       alert('Uno o mas campos estan vacios. Por favor rectifica e intenta de nuevo')
       return ;
     };
-    
+    this.loading = true;
     let formData = this.configFormData(this.petPostForm.value);    
     
     if(this.mode==='create'){
-      this.petService.createPet(formData);
+      this.handlePetCreate(formData);      
     };
 
     if(this.mode==='edit'){
-      this.petService.updatePet(this.petId,formData);
+      this.handlePetUpdate(formData);      
     };
     
   }
@@ -144,14 +148,42 @@ export class PetPostComponent implements OnInit {
     }
 
     return formData;
-    /* const formData = new FormData();
-    for (const key in form){      
-      formData.append(key,form[key]);
-    }
-    if(this.image){
-      formData.append('image',this.image);
-    }
-    return formData; */
-  }  
+    
+  }
+  
+  handlePetCreate(form){
+    this.petService.createPet(form).subscribe(res=>{
+      if(res.success){
+        this.petService.updatePetsArray(res.result);
+        this.petService._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
+      }
+    },err=>{
+      this.loading = false;
+      this.errorMessage = err.error.result;      
+    });
+  }
+
+  handlePetUpdate(form){
+    this.petService.updatePet(this.petId,form).subscribe(res=>{
+      if(res.success){
+        let updatedPetsArray = this.petService.afterUpdate(res.result);
+        this.petService.updatePetsArray(updatedPetsArray);
+        alert('Se actualizo la informacion');
+        this.petService._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
+      }
+    },err=>{
+      this.loading = false;
+      this.errorMessage = err.error.result;  
+    });
+  }
 
 }
+
+
+/* .subscribe(res=>{
+  if(res.success){
+    this.userService.updatedUserData('pets',res.result);
+    alert('Mascota creada exitosamente');
+    this._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
+  }
+}) */

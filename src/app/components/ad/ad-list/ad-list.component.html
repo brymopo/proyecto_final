@@ -7,7 +7,7 @@
     </h1>
     <div *ngIf='ads?.length;else noAds' >
         <div  class="m-2 row">
-            <div *ngFor='let ad of ads' class="card col-4">
+            <div *ngFor='let ad of ads' class="card col-lg-4 col-sm-6 col-12">
                 <div class="card-body">                
                     <img *ngIf='ad.pet.pictures[0]' [src]='ad.pet.pictures[0]' class="img-fluid">
                     <img *ngIf='!ad.pet.pictures[0]' src='../../../../assets/images/blank.png' class="img-fluid">
@@ -18,11 +18,11 @@
                     <button class="btn btn-success" routerLink='{{ad._id}}'>
                         Ver
                     </button>
-                    <button class="btn btn-danger" (click)='onDelete(ad._id)'>
+                    <button *ngIf="mode==='mis_anuncios'" class="btn btn-danger" (click)='onDelete(ad._id)'>
                         Eliminar
                     </button>
-                </div>            
-                
+                </div>        
+                <app-loading-modal [id]='ad._id' [toDelete]='deleting'></app-loading-modal>
             </div>
         </div>
         
@@ -33,10 +33,10 @@
                 Aun no has agregado anuncios
             </strong>
         </p>
-    </ng-template>
-
+    </ng-template>    
     <button class="btn btn-primary" routerLink='../anuncios_form/nuevo'>
         Agregar anuncio
-    </button>
+    </button>       
 </section>
 <app-loading *ngIf='loading'></app-loading>
+

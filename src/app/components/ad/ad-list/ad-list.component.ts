@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Ad } from '../../../models/ad';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
@@ -16,9 +16,11 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 export class AdListComponent implements OnInit, OnDestroy{
     public ads:Ad[];
     public loading:boolean;
+    public deleting:string;
     public mode:String;
     private userSub = new Subscription();
     private adSub = new Subscription();
+    
 
     constructor(private userService:UserService,
                 private adService:AdService,
@@ -64,9 +66,22 @@ export class AdListComponent implements OnInit, OnDestroy{
         }
     }
 
-    onDelete(id:String){
-        this.adService.deleteAds(id);
+    onDelete(id:string){
+        this.deleting = id;
+        this.adService.deleteAds(id).subscribe(res=>{
+            this.adService.updateAfterDelete(res.result);
+            this.adService.router.navigateByUrl('/mi_perfil/anuncios/mis_anuncios');
+        },err=>{
+            this.deleting = "";
+            this.userService.getUserData();
+            alert('Ocurrio un error al eliminar');            
+        });
     } 
+
+    onRemoveAd(event){
+        console.log('Inside the ad-list');
+        console.log(event);
+    }
     
     ownAds(){
         return this.mode==='mis_anuncios'

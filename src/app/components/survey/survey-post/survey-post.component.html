@@ -35,11 +35,14 @@
             </li>
         </ol>
     </ng-template>
+    <p *ngIf="errorMessage" class="h3 text-danger text-center my-3">
+        <strong>  ***** {{ errorMessage }} ***** </strong>
+    </p>
     <div class="d-flex justify-content-around">
-        <button *ngIf='!common.buttonLoading' class="btn btn-success">
+        <button *ngIf='!submitting' class="btn btn-success">
             Responder Encuesta
         </button>        
-        <app-loading-button *ngIf="common.buttonLoading" [message]="'Respondiendo encuesta'"></app-loading-button>
+        <app-loading-button *ngIf="submitting" [message]="'Respondiendo encuesta'"></app-loading-button>
         <a class="btn btn-warning" routerLink='../loggedInUser'>
             Cancelar
         </a>

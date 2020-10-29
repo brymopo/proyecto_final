@@ -38,7 +38,7 @@ export class SurveyService {
   constructor(private http:HttpClient,
               private userService:UserService,
               private common:Common,
-              private router:Router
+              public router:Router
               ){ 
 
   }
@@ -84,22 +84,9 @@ export class SurveyService {
    * @param {*} form - the user-submitted form with the info to build a new survey in DB.
   */
 
-  createSurvey(form){
-    
+  createSurvey(form){    
     let createUrl = this.common.getUrl('/survey/new');
-
-    this.http.post<{success:Boolean,result:Survey}>(createUrl, form).subscribe(res=>{
-      if(res.success){
-        this.userService.updatedUserData('survey',[res.result]);
-        this.common.buttonLoading = false;        
-        alert('La encuesta fue creada correctamente!');
-        this.router.navigateByUrl('mi_perfil/encuesta/loggedInUser');            
-      }
-    },err=>{
-      if(err){
-        alert('Oops, algo salio mal. Si el problema persiste, contacta al admin');
-      }
-    })
+    return this.http.post<{success:Boolean,result:Survey}>(createUrl, form);    
   }
 
   /**
@@ -111,18 +98,7 @@ export class SurveyService {
 
   deleteSurvey(id:String){
     const deleteUrl = this.common.getUrl(`/survey/${id}/delete`);
-
-    this.http.delete<{success:Boolean,result:any}>(deleteUrl)
-    .subscribe(res=>{
-      if(res.success){
-        this.userService.updatedUserData('survey',[]);        
-        alert('Se elimino la encuesta')
-        this.router.navigateByUrl('mi_perfil/encuesta/loggedInUser');
-      }else{
-        console.log('Something went wrong')
-        console.log(res.result)
-      }
-    })
+    return this.http.delete<{success:Boolean,result:any}>(deleteUrl);   
   }
 
   /**
@@ -133,19 +109,7 @@ export class SurveyService {
    */
   updateSurvey(id:String, survey){
     const updateUrl = this.common.getUrl(`/survey/${id}/update`);
-
-    this.http.put<{success:Boolean,result:Survey}>(updateUrl,survey)
-    .subscribe(res=>{
-      if(res.success){
-        
-        this.userService.updatedUserData('survey',[res.result]);        
-        alert('Se actualizo la encuesta');
-        this.router.navigateByUrl('mi_perfil/encuesta/loggedInUser');
-      }else{
-        console.log('Something went wrong')
-        console.log(res.result)
-      }
-    })
+    return this.http.put<{success:Boolean,result:Survey}>(updateUrl,survey);    
   } 
 
   /**

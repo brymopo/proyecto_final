@@ -20,7 +20,7 @@ export class AdService{
     constructor(private http:HttpClient,
                 private common:Common,
                 private userService:UserService,
-                private router:Router){
+                public router:Router){
 
     }
 
@@ -58,14 +58,7 @@ export class AdService{
     createAd(form:Pet){
         let createUrl = this.common.getUrl('/ads/create');
         console.log(createUrl)
-        this.http.post<{success:Boolean,result:Ad}>(createUrl,form)
-        .subscribe(res=>{
-            if(res.success){
-                this.updateAds(res.result);
-                this.router.navigateByUrl('/mi_perfil/anuncios/mis_anuncios');
-                alert('Se creo el anuncio!')
-            }
-        })
+        return this.http.post<{success:Boolean,result:Ad}>(createUrl,form);        
     }
 
     updateAds(newAdd:Ad){
@@ -76,21 +69,15 @@ export class AdService{
 
     deleteAds(id:String){
         const deleteUrl = this.common.getUrl(`/ads/${id}/delete`);
-        this.http.delete<{success:Boolean,result:String}>(deleteUrl)
-        .subscribe(res=>{
-            if(res.success){
-                this.userService.updatedUserData('ads',this.updateAfterDelete(res.result));
-                this.router.navigateByUrl('/mi_perfil/anuncios/mis_anuncios');
-                alert('Se elimino el anuncio!')
-            }
-        })
+        return this.http.delete<{success:Boolean,result:string}>(deleteUrl);        
     }
 
-    updateAfterDelete(id:String){
+    updateAfterDelete(id:string){
         let userAds = this.userService.copyUserInfo().ads;
         let result  = userAds.filter(ad=>ad._id !== id);
-        return result
+
+        this.userService.updatedUserData('ads',result);
+        
     }   
-    
 
 }

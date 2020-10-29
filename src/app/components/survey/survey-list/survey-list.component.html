@@ -1,40 +1,46 @@
-<h1 class="text-success">
-    Mi Encuesta De Adopcion 
-</h1>
-    <div *ngIf='survey.length; else noSurvey'>
-        <ol>
-           <li *ngFor='let pair of survey[0].QandA'>
-               <p class="text-primary">
-                   <strong>
-                    {{ pair.question }}
-                   </strong>
-               </p>
-               <p>
-                    {{ pair.answer }}
+<app-loading *ngIf="loading"></app-loading>
+<section *ngIf="!loading">
+    <h1 class="text-success">
+        Mi Encuesta De Adopcion 
+    </h1>
+        <div *ngIf='survey.length; else noSurvey'>
+            <ol>
+            <li *ngFor='let pair of survey[0].QandA'>
+                <p class="text-primary">
+                    <strong>
+                        {{ pair.question }}
+                    </strong>
                 </p>
-           </li>
-           
-        </ol>
-        <div *ngIf='isLoggedInUser()' class="d-flex justify-content-around my-2">
-            <button class="btn btn-outline-success" routerLink="../editar_encuesta">
-                Editar respuestas
-            </button>
-            <button class="btn btn-outline-danger" (click)='deleteSurvey()'>
-                Eliminar encuesta
-            </button>
-            <app-loading-button [message]="'Eliminando encuesta'"></app-loading-button>
-        </div>
-    </div>
-    <ng-template #noSurvey>
-        <div *ngIf='isLoggedInUser()' >
-            <p>
-                <strong>
-                    Aun no has llenado la encuesta de adopcion.
-                </strong>
+                <p>
+                        {{ pair.answer }}
+                    </p>
+            </li>
+            
+            </ol>
+            <p *ngIf="errorMessage" class="h3 text-danger text-center my-3">
+                <strong>  ***** {{ errorMessage }} ***** </strong>
             </p>
-            <a class="btn btn-primary text-white" routerLink="../editar_encuesta">
-                Llenar la encuesta
-            </a>           
-        </div>        
-    </ng-template>
+            <div *ngIf='isLoggedInUser()' class="d-flex justify-content-around my-2">
+                <button class="btn btn-outline-success" routerLink="../editar_encuesta">
+                    Editar respuestas
+                </button>
+                <button *ngIf='!deleting' class="btn btn-outline-danger" (click)='deleteSurvey()'>
+                    Eliminar encuesta
+                </button>
+                <app-loading-button *ngIf='deleting' [message]="'Eliminando encuesta'"></app-loading-button>
+            </div>
+        </div>
+        <ng-template #noSurvey>
+            <div *ngIf='isLoggedInUser()' >
+                <p>
+                    <strong>
+                        Aun no has llenado la encuesta de adopcion.
+                    </strong>
+                </p>
+                <a class="btn btn-primary text-white" routerLink="../editar_encuesta">
+                    Llenar la encuesta
+                </a>           
+            </div>        
+        </ng-template>
+</section>
     

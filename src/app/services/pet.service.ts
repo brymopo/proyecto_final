@@ -13,7 +13,7 @@ export class PetService {
   constructor(private http:HttpClient,
               private userService:UserService,
               private common:Common,
-              private _router:Router) { 
+              public _router:Router) { 
 
   }
 
@@ -28,14 +28,8 @@ export class PetService {
 
     let baseURL = this.common.getUrl('/pets/create');
     console.log('received form: ',form);
-    this.http.post<{success:Boolean,result:Pet[]}>(baseURL,form)
-    .subscribe(res=>{
-      if(res.success){
-        this.userService.updatedUserData('pets',res.result);
-        alert('Mascota creada exitosamente');
-        this._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
-      }
-    })
+    return this.http.post<{success:Boolean,result:Pet[]}>(baseURL,form);
+    
   }
 
   updatePet(id:String,form:FormData){
@@ -44,16 +38,8 @@ export class PetService {
     and sets pets property of the User object to this new value. 
     */
     let updateURL = this.common.getUrl(`/pets/${id}/update`);
-
-    this.http.post<{success:Boolean,result:Pet}>(updateURL,form)
-    .subscribe(res=>{
-      if(res.success){
-        let updatedPetsArray = this.afterUpdate(res.result);
-        this.userService.updatedUserData('pets',updatedPetsArray);
-        alert('Se actualizo la informacion');
-        this._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
-      }
-    })
+    return this.http.post<{success:Boolean,result:Pet}>(updateURL,form);
+    
   }
 
   /**
@@ -64,16 +50,7 @@ export class PetService {
 
   deletePet(id:String){
     let deleteURL = this.common.getUrl(`/pets/${id}/delete`);
-    
-    this.http.delete<{success:Boolean,result:String}>(deleteURL)
-    .subscribe(res=>{
-      if(res.success){
-        let updatedPetsArray = this.updateAfterDelete(res.result)
-        this.userService.updatedUserData('pets',updatedPetsArray);
-        alert('Mascota eliminada')
-        this._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
-      }
-    })
+    return this.http.delete<{success:Boolean,result:String}>(deleteURL);    
   }
 
   /**
@@ -110,6 +87,10 @@ export class PetService {
   getCopyPet(id:String){
     let pets = this.userService.copyUserInfo().pets;
     return {...pets.find(p => p._id === id)};
+  }
+
+  updatePetsArray(petsArray:Pet[]){
+    this.userService.updatedUserData('pets',petsArray);
   }
   
 }

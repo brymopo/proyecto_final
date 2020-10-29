@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../components/loading/loading.component';
 import { LoadingButtonComponent } from '../components/loading/loading-button/loading-button.component';
 import { MessagePostComponent } from '../components/message/message-post/message-post.component';
+import { LoadingModalComponent } from '../components/loading/loading-modal/loading-modal.component';
 
 @NgModule({
     declarations:[
         LoadingComponent,
         LoadingButtonComponent,
-        MessagePostComponent
+        MessagePostComponent,
+        LoadingModalComponent
     ],
     imports:[
         FormsModule,
@@ -19,7 +21,8 @@ import { MessagePostComponent } from '../components/message/message-post/message
     exports:[
         LoadingComponent,
         LoadingButtonComponent,
-        MessagePostComponent
+        MessagePostComponent,
+        LoadingModalComponent
     ]
 })
 
