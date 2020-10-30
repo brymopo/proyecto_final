@@ -15,7 +15,8 @@ export class AdService{
     private ads:Ad[];
     private allAds:Ad[];    
     private adSub = new Subject();
-    private allAdsSub = new Subject();      
+    private allAdsSub = new Subject(); 
+        
     
     constructor(private http:HttpClient,
                 private common:Common,
@@ -48,6 +49,8 @@ export class AdService{
         return this.http.get<{success:Boolean,result:Ad[]}>(adsUrl)
         .subscribe(res=>{
             this.allAdsSub.next(res.result);
+        },err=>{
+            this.allAdsSub.next(err);
         })
     }
 

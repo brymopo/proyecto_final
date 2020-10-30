@@ -20,6 +20,7 @@ export class AdListComponent implements OnInit, OnDestroy{
     public mode:String;
     private userSub = new Subscription();
     private adSub = new Subscription();
+    public errorMessage = ""; 
     
 
     constructor(private userService:UserService,
@@ -47,6 +48,9 @@ export class AdListComponent implements OnInit, OnDestroy{
                     this.ads = ads;
                     this.loading=false;
                     console.log(ads)
+                },err=>{
+                    this.loading=false;
+                    this.errorMessage = err.error.result;
                 })
             } else {
                 this._router.navigateByUrl('**');

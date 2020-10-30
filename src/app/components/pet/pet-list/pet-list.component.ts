@@ -51,6 +51,10 @@ export class PetListComponent implements OnInit, OnDestroy {
     });
   }
   
+  getImageUrl(id:string){
+    return this.petService.getImageUrl(id);
+  }
+
   ngOnDestroy(){    
     this.userSub.unsubscribe();
   }

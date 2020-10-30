@@ -7,6 +7,7 @@
     <div class="form-group">
         <label for="image">Imagen</label>
         <input type="file" formControlName="image" id="image" class="form-control" (change)='prepareImage($event)'>
+        
         <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
         <img *ngIf='!previewURL' src='../../../../assets/images/blank.png' alt="preview" #image class="img-fluid">
     </div>
@@ -108,9 +109,9 @@
         </label>
         <textarea formControlName="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>      
     </div>
-    <p *ngIf="errorMessage" class="h3 text-danger text-center my-3">
-        <strong>  ***** {{ errorMessage }} ***** </strong>
-    </p>    
+
+    <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
+    
     <button *ngIf='!loading' class="btn btn-lg btn-primary mr-2">
         <span *ngIf='mode==="create";else editPet'> Añadir mascota  </span>
         <ng-template #editPet >Modificar mascota</ng-template> 

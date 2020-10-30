@@ -7,9 +7,9 @@
         <p>
             Hemos enviado un mensaje de texto al numero de telefono registrado con tu cuenta. Si no lo recibes pasados 5 minutos, por favor intenta nuevamente
         </p>
-        <h3 class="text-danger" *ngIf='feedback'>
-            {{ feedback }}
-        </h3>
+
+        <app-feedback [injectClass]="'text-info'" [message]="feedback"></app-feedback>
+        
         <form [formGroup]="form2FA" (ngSubmit)="verifyCode()">
             <div class="form-group">
                 <input formControlName="code" placeholder="Introduce el codigo" class="form-control" type="number">

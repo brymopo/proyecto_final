@@ -6,13 +6,17 @@ import { LoadingComponent } from '../components/loading/loading.component';
 import { LoadingButtonComponent } from '../components/loading/loading-button/loading-button.component';
 import { MessagePostComponent } from '../components/message/message-post/message-post.component';
 import { LoadingModalComponent } from '../components/loading/loading-modal/loading-modal.component';
+import { FeedbackComponent } from '../components/loading/feedback/feedback.component';
+import { ImageComponent } from '../components/loading/image/image.component'
 
 @NgModule({
     declarations:[
         LoadingComponent,
         LoadingButtonComponent,
         MessagePostComponent,
-        LoadingModalComponent
+        LoadingModalComponent,
+        FeedbackComponent,
+        ImageComponent
     ],
     imports:[
         FormsModule,
@@ -22,7 +26,9 @@ import { LoadingModalComponent } from '../components/loading/loading-modal/loadi
         LoadingComponent,
         LoadingButtonComponent,
         MessagePostComponent,
-        LoadingModalComponent
+        LoadingModalComponent,
+        FeedbackComponent,
+        ImageComponent
     ]
 })
 

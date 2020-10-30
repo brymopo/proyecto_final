@@ -29,7 +29,9 @@
             </label>
             <input type="email" placeholder="me@example.com" id="email" required formControlName="email" class="form-control col">
         </div>
-        <p class="small text-danger" *ngIf="signUpForm.get('email').hasError('email')">El email es incorrecto</p>
+        
+        <app-feedback [injectClass]="'small text-danger'" [message]="'El email es incorrecto'" *ngIf="signUpForm.get('email').hasError('email')"></app-feedback>
+        
         <div class="form-group row">
             <label for="phone" class="col">
                 Telefono:
@@ -37,8 +39,8 @@
             <input type="number" placeholder="telefono" id="phone" required formControlName="phone" class="form-control col" pattern="[0-9]*">            
         </div>
         <div *ngIf="signUpForm.get('phone').value">
-            <p class="text-danger" *ngIf="signUpForm.get('phone').hasError('badLength')">El numero de telefono debe tener exactamente 10 digitos</p>
-            <p class="text-danger" *ngIf="signUpForm.get('phone').hasError('wrongPrefix')">El numero de telefono debe comenzar por 3</p>               
+            <app-feedback [injectClass]="'text-danger'" [message]="'El numero de telefono debe tener exactamente 10 digitos'" *ngIf="signUpForm.get('phone').hasError('badLength')"></app-feedback>
+            <app-feedback [injectClass]="'text-danger'" [message]="'El numero de telefono debe comenzar por 3'" *ngIf="signUpForm.get('phone').hasError('wrongPrefix')"></app-feedback>
         </div>
            
         <div class="form-group row">
@@ -47,25 +49,21 @@
             </label>
             <input type="password" placeholder="*********" id="password" required formControlName="password" class="form-control col">
         </div>
-        <div *ngIf="signUpForm.get('password').errors?.minlength">
-            <p class="text-danger" >La contraseña debe tener mínimo 6 caracteres</p>
-       </div>
-        <div class="form-group row">
+       <app-feedback *ngIf="signUpForm.get('password').errors?.minlength" [injectClass]="'text-danger'" [message]="'La contraseña debe tener mínimo 6 caracteres'"></app-feedback> 
+       <div class="form-group row">
             <label for="repeat" class="col">
                 Repetir contraseña:
             </label>
             <input type="password" formControlName='passwordRepeat' required placeholder="*********"  id="repeat" class="form-control col">
         </div>
-        <p class="text-danger" *ngIf="signUpForm.hasError('passwordMatch')">
-            las contraseñas no coinciden. Por favor verifica e intenta de nuevo
-        </p> 
-        <h4 class="text-danger" *ngIf='errorMessage'>
-            {{ errorMessage }}
-        </h4>           
-            <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
-                Crear cuenta
-            </button>
-            <app-loading-button *ngIf='isLoading' [message]='"Creando cuenta"'></app-loading-button>      
+        <app-feedback *ngIf="signUpForm.hasError('passwordMatch')" [injectClass]="'text-danger'" [message]="'las contraseñas no coinciden. Por favor verifica e intenta de nuevo'"></app-feedback>
+        <app-feedback [injectClass]="'text-danger lead'" [message]="errorMessage"></app-feedback>
+        
+        <button *ngIf='!isLoading' class="btn btn-lg btn-primary">
+            Crear cuenta
+        </button>
+        
+        <app-loading-button *ngIf='isLoading' [message]='"Creando cuenta"'></app-loading-button>      
         
     </form>       
 

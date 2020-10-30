@@ -27,9 +27,7 @@
             Cancelar
         </button>
     </div>   
-    <p class="text-danger" *ngIf="errorMessage">
-        {{ errorMessage }}
-    </p>
+    <app-feedback [injectClass]="'text-danger'" [message]="errorMessage"></app-feedback>
 </form>
 
 <div *ngIf='!pets.length'>

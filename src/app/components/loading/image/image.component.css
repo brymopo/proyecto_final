@@ -1,0 +1,26 @@
+svg{
+    max-width:100%;
+    height: auto;
+}
+
+.hidden{
+    display: none;
+}
+
+.loader-container{
+    width: 100%;    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100%;
+    position: relative;        
+}
+
+#loader{
+    width: 100%;
+    position: absolute;    
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;    
+}

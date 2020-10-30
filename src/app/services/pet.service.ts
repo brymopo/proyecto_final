@@ -93,4 +93,8 @@ export class PetService {
     this.userService.updatedUserData('pets',petsArray);
   }
   
+  getImageUrl(id:string){
+    return this.common.getUrl(`/getImage?image=${id}`)
+  }
+
 }

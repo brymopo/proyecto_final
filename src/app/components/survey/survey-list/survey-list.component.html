@@ -17,9 +17,9 @@
             </li>
             
             </ol>
-            <p *ngIf="errorMessage" class="h3 text-danger text-center my-3">
-                <strong>  ***** {{ errorMessage }} ***** </strong>
-            </p>
+            
+            <app-feedback [injectClass]="'h3 text-danger text-center my-3'" [message]="errorMessage"></app-feedback>
+            
             <div *ngIf='isLoggedInUser()' class="d-flex justify-content-around my-2">
                 <button class="btn btn-outline-success" routerLink="../editar_encuesta">
                     Editar respuestas

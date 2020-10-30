@@ -80,7 +80,7 @@ export class PetPostComponent implements OnInit {
         this.petId = paramMap.get('petId');
         this.pet = this.petService.getCopyPet(this.petId);
         this.pet.dob = moment(this.pet.dob).format('YYYY-MM-DD');
-        this.previewURL = this.pet.pictures[0];              
+        this.previewURL = this.petService.getImageUrl(this.pet.pictures[0]);              
       }
       this.validator(this.pet);
       

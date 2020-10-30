@@ -35,9 +35,7 @@
             </li>
         </ol>
     </ng-template>
-    <p *ngIf="errorMessage" class="h3 text-danger text-center my-3">
-        <strong>  ***** {{ errorMessage }} ***** </strong>
-    </p>
+    <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
     <div class="d-flex justify-content-around">
         <button *ngIf='!submitting' class="btn btn-success">
             Responder Encuesta

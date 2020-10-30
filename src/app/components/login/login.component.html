@@ -1,8 +1,6 @@
 <section id="login">
     
-    <h4 class="text-danger bg-white p-3" *ngIf='loginFailed'>
-        {{ loginFailed}}
-    </h4>
+    <app-feedback [injectClass]='"h4 text-danger bg-white p-3"' [message]='loginFailed'></app-feedback>
 
     <form class="p-4" (submit)='onSubmit()' [formGroup]='loginForm'>
         <div class="text-center">
