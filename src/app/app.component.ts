@@ -17,6 +17,9 @@ export class AppComponent {
     if(!rememberMe){
       localStorage.clear();
     }
+    if(localStorage.getItem('dismissed')){
+      localStorage.setItem('dismissed','');
+    }
   }
 
    @HostListener('window:offline',['$event'])

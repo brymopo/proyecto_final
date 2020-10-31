@@ -1,7 +1,29 @@
-<h1 class="text-success text-center mt-5">
-    Por favor espere mientras validamos tu correo...
-</h1>
-<app-loading></app-loading>
+<section>
+    <div *ngIf="loading">
+        <h1 class="text-success text-center mt-5">
+            Por favor espere mientras validamos tu correo...
+        </h1>
+        <app-loading></app-loading>
+    </div>
+
+    <div *ngIf="errorMessage" >
+        <app-feedback [message]="errorMessage" [injectClass]="'h1 text-center text-info'"></app-feedback>
+        <div class="m-auto p-3" style="width: 30%;">
+            <app-image [errorIcon]="true"></app-image>
+        </div>
+    </div>    
+    
+    <div *ngIf="success">
+        <app-feedback [message]="success" [injectClass]="'h1 text-center text-success'"></app-feedback>
+        <div class="m-auto p-3" style="width: 30%;">
+            <app-image [successIcon]="true"></app-image>
+        </div>
+        <a class="btn btn-success" (click)="nextStep()">
+            Siguiente
+        </a>
+    </div>
+</section>
+
 
 
 

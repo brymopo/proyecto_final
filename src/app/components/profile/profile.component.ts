@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
 
     public userInfo:User;
     public isLoading:Boolean;   
-    private userSub = new Subscription();    
+    private userSub = new Subscription();
+    public showAnnouncement = false;    
 
     constructor(private userService:UserService,
                 private authService:AuthService,
@@ -39,7 +40,10 @@ export class ProfileComponent implements OnInit,OnDestroy{
                 this.userInfo = user;
                 console.log("user info changed: ",user);
                 this.isLoading = false;
-                this.router.navigateByUrl('mi_perfil/usuario');           
+                this.router.navigateByUrl('mi_perfil/usuario'); 
+                if(!this.userInfo.survey.length && !localStorage.getItem('dismissed')){
+                    this.showAnnouncement = true;
+                }          
             })
         }
         
@@ -51,5 +55,16 @@ export class ProfileComponent implements OnInit,OnDestroy{
 
     isLoggedIn(){
         return this.authService.isLoggedIn();
-    }    
+    } 
+    
+    dismiss(){
+        this.showAnnouncement = false;
+        localStorage.setItem('dismissed','dismissed');
+        
+    }
+
+    toSurveyPost(){
+        this.dismiss();
+        this.router.navigateByUrl('mi_perfil/encuesta/editar_encuesta');
+    }
 }

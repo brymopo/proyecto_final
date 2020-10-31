@@ -8,6 +8,9 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./email-verified.component.css']
 })
 export class EmailVerifiedComponent implements OnInit {
+  public loading=true;
+  public success:string;
+  public errorMessage:string;
 
   constructor(private route:ActivatedRoute,
               private AuthService:AuthService) { }
@@ -16,9 +19,24 @@ export class EmailVerifiedComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap:ParamMap)=>{
       let token = paramMap.get('token');
       if(token.length){
-        this.AuthService.validateEmail(token);
+        this.AuthService.validateEmail(token).subscribe(res=>{
+            if(res.result){
+              this.success = "Gracias, tu correo ha sido confirmado!"
+              this.loading = false;
+            }            
+        },err=>{
+          this.loading = false;
+          this.errorMessage = err.error.result;
+        });
+      }else{
+        this.loading = false;
+        this.errorMessage = 'Algo salio mal. Por favor intenta de nuevo'
       }
     })
+  }
+
+  nextStep(){
+    this.AuthService.router.navigateByUrl('iniciarsesion')
   }
 
 }

@@ -13,7 +13,7 @@
         </div>
         <div *ngIf='pets.length' class="container row"> 
             <div *ngFor='let pet of pets' class="col-4 my-2" >
-                <div class="card">
+                <div class="card raised">
 
                     <app-image [pictureId]='pet.pictures[0]'></app-image>
                     

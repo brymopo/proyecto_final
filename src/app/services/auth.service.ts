@@ -27,7 +27,7 @@ export class AuthService implements OnInit{
     
 
     constructor(private http:HttpClient,
-                private router:Router,
+                public router:Router,
                 private common:Common,
                 private userService:UserService){
 
@@ -126,7 +126,8 @@ export class AuthService implements OnInit{
 
     validateEmail(token:string){
         let url = this.common.getUrl(`/confirmation/${token}`);
-        this.http.get<{success:boolean,result:any}>(url)
+        return this.http.get<{success:boolean,result:string}>(url);
+        /* this.http.get<{success:boolean,result:any}>(url)
         .subscribe(res=>{
             if(res.success){
                 this.setLocalStorage(res.result);
@@ -134,9 +135,9 @@ export class AuthService implements OnInit{
                 this.router.navigateByUrl('mi_perfil');    
             }
         },err=>{
-            alert(`Oops, ocurrio un error: ${err.message}`);
+            alert(`Oops, ocurrio un error: ${err.error.result}`);
             this.router.navigateByUrl('/');    
-        })
+        }) */
     }
     
     validate2FA(form){

@@ -46,6 +46,28 @@
                 
             </div>
         </div>
+        <div *ngIf='showAnnouncement' class="announcement">
+            <div class="card w-50">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Parece que aun no has llenado la encuesta...
+                    </h3>
+                    <hr>
+                    <p class="lead">
+                        Ahorra tiempo y responde unas preguntas basicas sobre porque deseas adoptar una mascota. Asi, los anunciantes podran conocerte un poco mas cuando los contactes...
+                    </p>
+                    <p>
+                        Puedes llenar la encuesta seleccionando la opcion "Encuesta" del menu o presionando el boton "Responder Ahora".
+                    </p>
+                    <button class="btn btn-info mr-3" (click)="dismiss()">
+                        Recordar Mas tarde
+                    </button>
+                    <button class="btn btn-success" (click)="toSurveyPost()">
+                        Responder Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
     </div> 
     <ng-template #login>
         <h2>Debes iniciar sesion para poder ver esta seccion</h2>

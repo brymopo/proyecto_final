@@ -1,28 +1,30 @@
-<section class="container" *ngIf='!loading'>
+<section *ngIf='!loading' [class.gradient]="!ownAds()" class="px-3">
     <h1 *ngIf='ownAds()' class="text-success text-center">
         Mis Anuncios
     </h1>
-    <h1 *ngIf='!ownAds()' class="text-primary text-center my-3">
+    <h1 *ngIf='!ownAds()' class="text-primary text-center p-3">
         Mascotas en adopcion
     </h1>
 
     <app-feedback [injectClass]="'text-danger'" [message]="errorMessage"></app-feedback>
     
-    <div *ngIf='ads?.length;else noAds' class="m-2 row">
-        <div *ngFor='let ad of ads' class="my-2 col-lg-4 col-sm-6 col-12">
-            <div  class="card">
+    <div *ngIf='ads?.length;else noAds' class="mt-2 row">
+        <div *ngFor='let ad of ads' class="my-2 col-lg-3 col-md-4 col-sm-6 col-12">
+            <div  class="card raised">
                 <div class="card-body">
                     <app-image [pictureId]='ad.pet.pictures[0]'></app-image>                    
                     <p>Hola, soy {{ ad.pet.name }} </p>
                     <p>
                         <span>{{ad.pet.city}}</span>, <span>{{ ad.pet.province }}</span>
                     </p>
-                    <button class="btn btn-success" routerLink='{{ad._id}}'>
-                        Ver
-                    </button>
-                    <button *ngIf="mode==='mis_anuncios'" class="btn btn-danger" (click)='onDelete(ad._id)'>
-                        Eliminar
-                    </button>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-success" routerLink='{{ad._id}}'>
+                            Ver
+                        </button>
+                        <button *ngIf="mode==='mis_anuncios'" class="btn btn-danger" (click)='onDelete(ad._id)'>
+                            Eliminar
+                        </button>
+                    </div>                    
                 </div>        
                 <app-loading-modal [id]='ad._id' [toDelete]='deleting'></app-loading-modal>
             </div>

@@ -13,7 +13,10 @@ export class ImageComponent implements OnInit{
     @Input() fullsize:boolean;
     @Input() smartphone:boolean;
     @Input() offline:boolean;
+    @Input() errorIcon:boolean;
+    @Input() successIcon:boolean;
     @Input() injectClass:string;
+
     
     public srcLink:string
     public loadError = false;
@@ -28,7 +31,7 @@ export class ImageComponent implements OnInit{
 
     ngOnInit(){
         
-        if(this.smartphone || this.offline){
+        if(this.smartphone || this.offline || this.errorIcon || this.successIcon){
 
             this.showBlank = false;
 
@@ -64,6 +67,6 @@ export class ImageComponent implements OnInit{
     }
 
     checkForSVG(){        
-        return !!(this.showBlank || this.smartphone || this.offline);
+        return !!(this.showBlank || this.smartphone || this.offline || this.errorIcon || this.successIcon);
     }
 }

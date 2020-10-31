@@ -1,6 +1,7 @@
 .profile{
     width: 95%;
-    margin: 25px auto;
+    min-height: 60vh;
+    margin: 25px auto;    
 }
 
 div.container-fluid{
@@ -12,14 +13,21 @@ div.container-fluid{
     padding: 0%;
 }
 
-div>.spinner-border.text-info {    
-    margin-left:37.5%;
-    width: 25%;
-    padding-top: 25%; /* 1:1 Aspect Ratio */
-    position: relative; /* If you want text inside of it */
-}
-
 div.col-md-10{
     max-height: 80vh;
     overflow-y: scroll;
+}
+
+.announcement{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: rgba(136, 133, 133, 0.603);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
