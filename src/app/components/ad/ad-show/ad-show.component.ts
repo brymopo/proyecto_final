@@ -36,7 +36,7 @@ export class AdShowComponent implements OnInit, OnDestroy{
             const id = paramMap.get('adId');
             this.adService.getOneAdPopulated(id);
             this.adSub = this.adService.getOneAdAsObservable()
-            .subscribe((add:Ad)=>{
+            .subscribe((add:Ad)=>{                
                 this.loading = false;
                 if(!add){
                     return;

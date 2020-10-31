@@ -1,8 +1,10 @@
 <navbar></navbar>
+
 <router-outlet *ngIf='!offline;else disconnected'></router-outlet>
+
 <ng-template #disconnected>
     <section class="text-center">
-        <app-offline></app-offline>
+        <app-image [offline]="true"></app-image>
         <h1 class="text-info">
             Parece que no tienes connexion a internet...
         </h1>

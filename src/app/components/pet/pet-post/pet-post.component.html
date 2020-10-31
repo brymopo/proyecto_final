@@ -9,7 +9,8 @@
         <input type="file" formControlName="image" id="image" class="form-control" (change)='prepareImage($event)'>
         
         <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
-        <img *ngIf='!previewURL' src='../../../../assets/images/blank.png' alt="preview" #image class="img-fluid">
+        <app-image *ngIf='!previewURL' ></app-image>
+        
     </div>
     <div class="form-group">
         <label for="name">

@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 
@@ -27,12 +26,10 @@ export class AppComponent {
 
   @HostListener('window:online',['$event'])
   onlineHandler(event){
-    this.offline = false;
-    console.log(event);
+    this.offline = false;    
   } 
 
-  constructor(private authService:AuthService,
-              private router:Router){
+  constructor(private authService:AuthService){
     
   }
   

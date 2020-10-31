@@ -10,9 +10,14 @@ import { Common } from '../../../services/common';
 export class ImageComponent implements OnInit{
     @Input() injectAlt:string;
     @Input() pictureId:string;
-    @Input() fullsize:boolean;   
-
-    public srcLink:string;    
+    @Input() fullsize:boolean;
+    @Input() smartphone:boolean;
+    @Input() offline:boolean;
+    @Input() injectClass:string;
+    
+    public srcLink:string
+    public loadError = false;
+    public showSVG:boolean;        
     public showBlank=false;
     public loadingDone = false;
     public imageUrl:string = "url('http://localhost:3000/assets/images/b92dRvzOlrE60fr9TsWN0IEx.jpg')";
@@ -23,16 +28,21 @@ export class ImageComponent implements OnInit{
 
     ngOnInit(){
         
-        if(!this.pictureId){
-            this.showBlank = true;
+        if(this.smartphone || this.offline){
+
+            this.showBlank = false;
+
+        }else if(!this.pictureId){
+            this.showBlank = true; 
         }else{
-            this.srcLink = this.common.getUrl(`/getImage?image=${this.pictureId}`);                     
+            this.srcLink = this.common.getUrl(`/getImage?image=${this.pictureId}`);                    
         }
-        
+
+        this.showSVG = this.checkForSVG();
     }
 
     onLoad(event){
-
+        console.log('on load trigerred...')
         if(!this.fullsize) {
 
             this.imageUrl = `url(${this.srcLink})`;            
@@ -46,9 +56,14 @@ export class ImageComponent implements OnInit{
     }
 
     onError(event){
-        
+        console.log('on error triggered...')
         this.showBlank = true;
-        this.loadingDone = false;       
+        this.loadingDone = true; 
+        this.loadError = true;      
         
+    }
+
+    checkForSVG(){        
+        return !!(this.showBlank || this.smartphone || this.offline);
     }
 }
