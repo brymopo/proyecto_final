@@ -4,11 +4,13 @@ import { UserService } from '../../../services/user.service';
 import { Pet } from '../../../models/pet';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
+import { fade } from '../../../animation';
 
 @Component({
   selector: 'app-pet-list',
   templateUrl: './pet-list.component.html',
-  styleUrls: ['./pet-list.component.css']
+  styleUrls: ['./pet-list.component.css'],
+  animations:[fade]
 })
 export class PetListComponent implements OnInit, OnDestroy {
   

@@ -1,13 +1,13 @@
 <app-loading *ngIf='isLoading'></app-loading >
     
-<div *ngIf='!isLoading' class="profile">   
-    <div class="container-fluid" *ngIf='isLoggedIn();else login'>
+<div *ngIf='!isLoading' class="profile raised--noHover" @fade>   
+    <div *ngIf='isLoggedIn();else login'>
         <div class="row">
-            <div class="col-md-2 card">
-                <a class="h2 card-header text-white bg-info" routerLink="usuario">
+            <div class="d-none d-md-block col-md-2 raised--rightOnly">
+                <a class="h2 w-100 d-block py-3 text-center text-white bg-info" routerLink="usuario">
                     Hola {{ userInfo.firstName }}
                 </a>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group text-center list-group-flush">
                     <li class="list-group-item">
                         <a class="text-primary" routerLink="editar">
                             Actualizar Perfil
@@ -38,9 +38,38 @@
                             Panel de Administrador
                         </a>
                     </li>
-                </ul>
+                </ul>          
+                
             </div>
-            <div class="col-md-10" *ngIf="isLoggedIn()">                
+            <div class="dropdown col-sm-12 d-block d-md-none">
+                <button class="btn btn-info w-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="h2">
+                        Hola {{ userInfo.firstName }}
+                    </span>                    
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="text-primary d-block" routerLink="editar">
+                        Actualizar Perfil
+                    </a>
+                    <a class="text-primary d-block" routerLink="encuesta/loggedInUser">
+                        Encuesta
+                    </a>
+                    <a class="text-primary d-block" routerLink='anuncios/mis_anuncios'>
+                        Mis Anuncios
+                    </a>
+                    <a class="text-primary d-block" routerLink="mensajes/mis_mensajes">
+                        Mis Mensajes
+                    </a>
+                    <a class="text-primary d-block" routerLink="mascotas/mis_mascotas">
+                        Mis Mascotas
+                    </a>
+                    <a class="text-primary d-block" *ngIf='userInfo.admin' routerLink="admin/pannel">
+                        Panel de Administrador
+                    </a>                  
+                </div>
+              </div>
+            
+            <div class="col-sm-12 col-md-10" *ngIf="isLoggedIn()">                
                 
                <router-outlet></router-outlet>
                 

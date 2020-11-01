@@ -297,7 +297,7 @@
     <app-loading-modal></app-loading-modal>
 </div>
 
-<div *ngIf='loadingDone && !fullsize && !loadError' class="loader-container raised" [ngStyle]="{'background-image':imageUrl}"></div>
+<div *ngIf='loadingDone && !fullsize && !loadError' class="loader-container" [ngStyle]="{'background-image':imageUrl}"></div>
 
 <img *ngIf='loadingDone && fullsize && !loadError' [src]="srcLink" [alt]="injectAlt" class="img-fluid" [ngClass]="injectClass">
 

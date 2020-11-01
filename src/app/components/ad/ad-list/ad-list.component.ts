@@ -5,12 +5,13 @@ import { UserService } from '../../../services/user.service';
 import { AdService } from '../../../services/ad.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-ad-list',
     templateUrl:'./ad-list.component.html',
-    styleUrls:['./ad-list.component.css']
+    styleUrls:['./ad-list.component.css'],
+    animations:[ fade ]
 })
 
 export class AdListComponent implements OnInit, OnDestroy{
@@ -73,19 +74,13 @@ export class AdListComponent implements OnInit, OnDestroy{
     onDelete(id:string){
         this.deleting = id;
         this.adService.deleteAds(id).subscribe(res=>{
-            this.adService.updateAfterDelete(res.result);
-            this.adService.router.navigateByUrl('/mi_perfil/anuncios/mis_anuncios');
+            this.adService.updateAfterDelete(res.result);            
         },err=>{
             this.deleting = "";
             this.userService.getUserData();
             alert('Ocurrio un error al eliminar');            
         });
-    } 
-
-    onRemoveAd(event){
-        console.log('Inside the ad-list');
-        console.log(event);
-    }
+    }     
     
     ownAds(){
         return this.mode==='mis_anuncios'

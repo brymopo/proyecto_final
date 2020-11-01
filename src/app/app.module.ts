@@ -1,9 +1,10 @@
 /*  Native Angular Modules Imports */
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 
@@ -84,7 +85,8 @@ import { OfflineComponent } from './components/offline/offline.component';
     AdModule,
     AdminModule,
     AppWideModule,
-    ConversationModule
+    ConversationModule,
+    BrowserAnimationsModule    
   ],
   providers: [
     AuthService,

@@ -10,7 +10,7 @@
     
     <div *ngIf='ads?.length;else noAds' class="mt-2 row">
         <div *ngFor='let ad of ads' class="my-2 col-lg-3 col-md-4 col-sm-6 col-12">
-            <div  class="card raised">
+            <div  class="card raised" @fade>
                 <div class="card-body">
                     <app-image [pictureId]='ad.pet.pictures[0]'></app-image>                    
                     <p>Hola, soy {{ ad.pet.name }} </p>

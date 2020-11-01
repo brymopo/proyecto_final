@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+
+
 import { AdRoutingModule } from '../routing/ad-routing.module';
 import { AppWideModule } from './app-wide.module';
 
@@ -19,7 +21,7 @@ import { AdShowComponent } from '../components/ad/ad-show/ad-show.component';
         CommonModule,
         AdRoutingModule,
         FormsModule,
-        AppWideModule        
+        AppWideModule                    
     ],
     exports:[
         AdListComponent,

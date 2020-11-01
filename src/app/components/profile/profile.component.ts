@@ -4,12 +4,14 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { Subscription } from 'rxjs';
+import { fade } from '../../animation';
 
 
 @Component({
     selector:'app-profile',
     templateUrl:'./profile.component.html',
-    styleUrls:['./profile.component.css']
+    styleUrls:['./profile.component.css'],
+    animations:[fade]
 })
 
 export class ProfileComponent implements OnInit,OnDestroy{   
@@ -40,7 +42,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
                 this.userInfo = user;
                 console.log("user info changed: ",user);
                 this.isLoading = false;
-                this.router.navigateByUrl('mi_perfil/usuario'); 
+                // this.router.navigateByUrl('mi_perfil/usuario'); 
                 if(!this.userInfo.survey.length && !localStorage.getItem('dismissed')){
                     this.showAnnouncement = true;
                 }          
