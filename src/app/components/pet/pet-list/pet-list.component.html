@@ -1,5 +1,5 @@
-<section>
-    <h1 class="text-success">
+<section @fade>
+    <h1 class="my-3 text-center text-success">
         Mis Mascotas
     </h1>
 
@@ -12,7 +12,7 @@
             </p>
         </div>
         <div *ngIf='pets.length' class="container row"> 
-            <div *ngFor='let pet of pets' class="col-4 my-2" @fade>
+            <div *ngFor='let pet of pets' class="my-2 col-lg-4 col-sm-6 col-12">
                 <div class="card raised">
 
                     <app-image [pictureId]='pet.pictures[0]'></app-image>
@@ -38,7 +38,7 @@
         </div>      
     </div>
 
-    <button class="btn btn-info" routerLink="../editar">
+    <button class="my-4 btn btn-info" routerLink="../editar">
             Agrega una mascota
     </button>
 </section>

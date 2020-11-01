@@ -6,12 +6,14 @@ import { Ad } from '../../../models/ad';
 import { Pet } from '../../../models/pet';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
+import { fade } from '../../../animation';
 
 
 @Component({
     selector:'app-ad-post',
     templateUrl:'./ad-post.component.html',
-    styleUrls:['./ad-post.component.css']
+    styleUrls:['./ad-post.component.css'],
+    animations:[fade]
 })
 
 export class AdPostComponent implements OnInit, OnDestroy{    

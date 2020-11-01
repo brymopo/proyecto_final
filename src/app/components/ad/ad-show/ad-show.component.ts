@@ -6,11 +6,13 @@ import { AdminService } from '../../../services/admin.service';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-ad-show',
     templateUrl:'./ad-show.component.html',
-    styleUrls:['./ad-show.component.css']
+    styleUrls:['./ad-show.component.css'],
+    animations:[fade]
 })
 
 export class AdShowComponent implements OnInit, OnDestroy{ 

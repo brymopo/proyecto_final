@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Common } from '../../../services/common';
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-image',
     templateUrl:'./image.component.html',
-    styleUrls:['./image.component.css']
+    styleUrls:['./image.component.css'],
+    animations:[fade]
 })
 
 export class ImageComponent implements OnInit{

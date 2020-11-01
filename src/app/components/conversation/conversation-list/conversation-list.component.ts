@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketioService } from '../../../services/socketio.service';
 import { Conversation } from '../../../models/conversation';
 import { Message } from '../../../models/message';
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-conversation-list',
     templateUrl:'./conversation-list.component.html',
-    styleUrls:['./conversation-list.component.css']
+    styleUrls:['./conversation-list.component.css'],
+    animations:[fade]
 })
 
 export class ConversationListComponent implements OnInit, OnDestroy{

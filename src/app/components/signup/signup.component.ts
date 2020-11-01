@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { fade } from '../../animation'
 
 @Component({
     selector:'app-signup',
     templateUrl:'./signup.component.html',
-    styleUrls:['./signup.component.css']
+    styleUrls:['./signup.component.css'],
+    animations:[fade]
 })
 
 export class SignupComponent{

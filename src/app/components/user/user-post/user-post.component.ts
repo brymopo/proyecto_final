@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-user-post',
     templateUrl:'./user-post.component.html',
-    styleUrls:['user-post.component.html']
+    styleUrls:['user-post.component.html'],
+    animations:[fade]
 })
 
 export class UserPostComponent implements OnInit, OnDestroy{

@@ -1,4 +1,4 @@
-<form  (submit)="onSubmit()" class="text-primary m-auto" [formGroup]='petPostForm'>
+<form @fade (submit)="onSubmit()" class="text-primary m-auto" [formGroup]='petPostForm'>
     <div class="text-center">
         <h1 *ngIf='mode==="create"' class="text-success">Añadir mascota</h1>
         <h1 *ngIf='mode==="edit"' class="text-success">Editar</h1>

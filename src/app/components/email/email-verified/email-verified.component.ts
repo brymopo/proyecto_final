@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { fade } from '../../../animation';
 
 @Component({
   selector: 'app-email-verified',
   templateUrl: './email-verified.component.html',
-  styleUrls: ['./email-verified.component.css']
+  styleUrls: ['./email-verified.component.css'],
+  animations:[fade]
 })
 export class EmailVerifiedComponent implements OnInit {
   public loading=true;

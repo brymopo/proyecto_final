@@ -3,12 +3,14 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PetService } from '../../../services/pet.service';
 import { Pet } from '../../../models/pet';
+import { fade } from '../../../animation';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-pet-post',
   templateUrl: './pet-post.component.html',
-  styleUrls: ['./pet-post.component.css']
+  styleUrls: ['./pet-post.component.css'],
+  animations:[fade]
 })
 export class PetPostComponent implements OnInit {
   

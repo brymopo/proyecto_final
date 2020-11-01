@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { fade } from '../../../animation';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  styleUrls: ['./reset-password.component.css'],
+  animations:[fade]
 })
 export class ResetPasswordComponent implements OnInit {
   private token:string;

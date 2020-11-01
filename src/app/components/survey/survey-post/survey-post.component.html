@@ -1,48 +1,50 @@
-<h1 class="text-success">
-    Mi Encuesta De Adopcion 
-</h1>
-
-<app-loading *ngIf='isLoading'></app-loading>
-
-<form *ngIf='!isLoading' (submit)='onSubmit(survey)' #survey='ngForm'>
+<section class="py-5" @fade>
+    <h1 class="text-center text-success">
+        Mi Encuesta De Adopcion 
+    </h1>
     
-    <ol *ngIf='hasSurvey;else createSurvey'>        
-        <li *ngFor='let question of userInfo.survey[0].QandA'> 
-                   
-                <label class="d-block" for="{{question.question}}">
-                    <p class="lead">
-                        <strong>
-                            {{ question.question }}
-                        </strong>
-                    </p>
-                </label>
-                <textarea name="{{question.question}}" style='width:100%' [ngModel]='question.answer'>                    
-                </textarea>            
-        </li>
-    </ol>
-    <ng-template #createSurvey>        
-        <ol>
-            <li *ngFor='let question of questions'>            
-                    <label class="d-block" for="{{question}}">
+    <app-loading *ngIf='isLoading'></app-loading>
+    
+    <form *ngIf='!isLoading' (submit)='onSubmit(survey)' #survey='ngForm'>
+        
+        <ol *ngIf='hasSurvey;else createSurvey'>        
+            <li *ngFor='let question of userInfo.survey[0].QandA'> 
+                       
+                    <label class="d-block" for="{{question.question}}">
                         <p class="lead">
                             <strong>
-                                {{ question }}
+                                {{ question.question }}
                             </strong>
                         </p>
                     </label>
-                    <textarea name="{{question}}" style='width:100%' ngModel>
+                    <textarea name="{{question.question}}" style='width:100%' [ngModel]='question.answer'>                    
                     </textarea>            
             </li>
         </ol>
-    </ng-template>
-    <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
-    <div class="d-flex justify-content-around">
-        <button *ngIf='!submitting' class="btn btn-success">
-            Responder Encuesta
-        </button>        
-        <app-loading-button *ngIf="submitting" [message]="'Respondiendo encuesta'"></app-loading-button>
-        <a class="btn btn-warning" routerLink='../loggedInUser'>
-            Cancelar
-        </a>
-    </div>
-</form>
+        <ng-template #createSurvey>        
+            <ol>
+                <li *ngFor='let question of questions'>            
+                        <label class="d-block" for="{{question}}">
+                            <p class="lead">
+                                <strong>
+                                    {{ question }}
+                                </strong>
+                            </p>
+                        </label>
+                        <textarea name="{{question}}" style='width:100%' ngModel>
+                        </textarea>            
+                </li>
+            </ol>
+        </ng-template>
+        <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
+        <div class="d-flex justify-content-around">
+            <button *ngIf='!submitting' class="btn btn-success">
+                Responder Encuesta
+            </button>        
+            <app-loading-button *ngIf="submitting" [message]="'Respondiendo encuesta'"></app-loading-button>
+            <a class="btn btn-warning" routerLink='../loggedInUser'>
+                Cancelar
+            </a>
+        </div>
+    </form>
+</section>

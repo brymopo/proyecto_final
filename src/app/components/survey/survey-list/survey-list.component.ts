@@ -5,11 +5,13 @@ import { User } from '../../../models/user';
 import { Survey } from '../../../models/survey';
 import { SurveyService } from '../../../services/survey.service';
 import { Subscription } from 'rxjs';
+import { fade } from '../../../animation';
 
 @Component({
   selector: 'app-survey-list',
   templateUrl: './survey-list.component.html',
-  styleUrls: ['./survey-list.component.css']
+  styleUrls: ['./survey-list.component.css'],
+  animations:[fade]
 })
 export class SurveyListComponent implements OnInit, OnDestroy {
   /**

@@ -3,11 +3,13 @@ import { SurveyService } from '../../../services/survey.service';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
 import { Subscription } from 'rxjs';
+import { fade } from '../../../animation';
 
 @Component({
   selector: 'app-survey-post',
   templateUrl: './survey-post.component.html',
-  styleUrls: ['./survey-post.component.css']
+  styleUrls: ['./survey-post.component.css'],
+  animations:[fade]
 })
 export class SurveyPostComponent implements OnInit, OnDestroy {
   /**

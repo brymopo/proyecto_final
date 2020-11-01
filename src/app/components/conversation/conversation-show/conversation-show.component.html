@@ -1,5 +1,5 @@
 
-<section  *ngFor='let message of messages'>
+<section @fade  *ngFor='let message of messages'>
     <div *ngIf='isUser(message.author);else external' class="d-flex justify-content-end my-2">
         <div class="bubble bg-success text-white my-1">
             <p  class="text-right">

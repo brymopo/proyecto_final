@@ -1,24 +1,26 @@
-<h1 class="text-success text-center">
-    Panel del administrador
-</h1>
-<div>
-    <h2 class="text-primary">
-        Anuncios reportados
-    </h2>
-    <ol *ngIf='reportedAds.length'>
-        <p class="lead">
-            Hay {{ reportedAds.length }} anuncios reportados
+<section @fade>
+    <h1 class="text-success text-center">
+        Panel del administrador
+    </h1>
+    <div>
+        <h2 class="text-primary">
+            Anuncios reportados
+        </h2>
+        <ol *ngIf='reportedAds.length'>
+            <p class="lead">
+                Hay {{ reportedAds.length }} anuncios reportados
+            </p>
+            <li *ngFor='let ad of reportedAds'>
+                <a class="text-info" routerLink="../../anuncios/{{ ad._id }}">
+                    Ver anuncio {{ ad._id  }}
+                </a>
+            </li>
+        </ol>
+        <p *ngIf='!reportedAds.length' class="lead">
+            <strong>
+                No se ha reportado ningun anuncio aun
+            </strong>
         </p>
-        <li *ngFor='let ad of reportedAds'>
-            <a class="text-info" routerLink="../../anuncios/{{ ad._id }}">
-                Ver anuncio {{ ad._id  }}
-            </a>
-        </li>
-    </ol>
-    <p *ngIf='!reportedAds.length' class="lead">
-        <strong>
-            No se ha reportado ningun anuncio aun
-        </strong>
-    </p>
-    
-</div>
+        
+    </div>
+</section>

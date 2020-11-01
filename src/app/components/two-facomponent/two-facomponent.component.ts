@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { fade } from '../../animation'
 
 @Component({
   selector: 'app-two-facomponent',
   templateUrl: './two-facomponent.component.html',
-  styleUrls: ['./two-facomponent.component.css']
+  styleUrls: ['./two-facomponent.component.css'],
+  animations:[fade]
 })
 export class TwoFAComponentComponent implements OnInit {
   public requestId:string;

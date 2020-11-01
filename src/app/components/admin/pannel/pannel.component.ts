@@ -3,11 +3,13 @@ import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 import { Ad } from '../../../models/ad';
 import { Admin } from '../../../models/admin';
+import { fade } from '../../../animation';
 
 @Component({
     selector:'app-pannel',
     templateUrl:'./pannel.component.html',
-    styleUrls:['./pannel.component.css']
+    styleUrls:['./pannel.component.css'],
+    animations:[fade]
 })
 
 export class PannelComponent implements OnInit, OnDestroy{

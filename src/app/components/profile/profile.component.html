@@ -5,7 +5,7 @@
         <div class="row">
             <div class="d-none d-md-block col-md-2 raised--rightOnly">
                 <a class="h2 w-100 d-block py-3 text-center text-white bg-info" routerLink="usuario">
-                    Hola {{ userInfo.firstName }}
+                    Hola {{ userInfo.firstName }} !
                 </a>
                 <ul class="list-group text-center list-group-flush">
                     <li class="list-group-item">
@@ -44,10 +44,10 @@
             <div class="dropdown col-sm-12 d-block d-md-none">
                 <button class="btn btn-info w-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="h2">
-                        Hola {{ userInfo.firstName }}
+                        Hola {{ userInfo.firstName }} !
                     </span>                    
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu w-100 p-3" aria-labelledby="dropdownMenuButton">
                     <a class="text-primary d-block" routerLink="editar">
                         Actualizar Perfil
                     </a>

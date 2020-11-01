@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { fade } from '../../animation';
 
 @Component({
     selector:'app-login',
     templateUrl:'./login.component.html',
-    styleUrls:['./login.component.css']
+    styleUrls:['./login.component.css'],
+    animations:[fade]
 })
 
 export class LoginComponent{
