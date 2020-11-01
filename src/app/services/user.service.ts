@@ -48,7 +48,8 @@ export class UserService implements OnInit{
             }
         }, err=>{
             if(err){
-                alert()
+                alert(`Ocurrio un error: ${err.message}`)
+                this.router.navigateByUrl('/')
             }
         })
     }
@@ -95,19 +96,9 @@ export class UserService implements OnInit{
      * @param form - The user-submitted form with the user info to update
      */
 
-    updateUser(form){
-        
+    updateUser(form){        
         const updateURL = this.common.getUrl('/users/update');
-        
-        this.http.put<{success:Boolean,result:User}>(updateURL,form)
-        .subscribe(res=>{
-            if(res.success){
-                this.userInfo = res.result;                
-                this.userDataEvent.next({...this.userInfo});                
-                alert('La operacion se completo exitosamente!')
-            }
-
-        })
+        return this.http.put<{success:Boolean,result:User}>(updateURL,form);        
     }
 
     destroyUser(){
@@ -124,5 +115,10 @@ export class UserService implements OnInit{
                 this.router.navigateByUrl('mi_perfil/cambiar_clave');
             }
         });
+    }
+
+    setUserInfo(user:User){
+        this.userInfo = user;
+        this.userDataEvent.next({...this.userInfo}); 
     }
 }

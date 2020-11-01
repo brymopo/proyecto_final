@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    position: relative;
+    padding-top: 76px;
+}
+
 .raised,
 .raised--noHover,
 .btn{    

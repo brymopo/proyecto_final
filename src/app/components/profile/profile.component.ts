@@ -41,8 +41,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
             .subscribe((user:User)=>{
                 this.userInfo = user;
                 console.log("user info changed: ",user);
-                this.isLoading = false;
-                // this.router.navigateByUrl('mi_perfil/usuario'); 
+                this.isLoading = false;                
                 if(!this.userInfo.survey.length && !localStorage.getItem('dismissed')){
                     this.showAnnouncement = true;
                 }          

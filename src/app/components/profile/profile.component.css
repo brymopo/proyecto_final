@@ -7,12 +7,12 @@
 }
 
 
-.col-md-2{
-    padding: 0%;
-    min-height: 80vh;
+.col-md-3{
+    padding:0;
+    min-height: 80vh;       
 }
 
-div.col-md-10{
+div.col-md-9{
     max-height: 80vh;
     overflow-y: scroll;
 }
@@ -29,4 +29,17 @@ div.col-md-10{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+ul.nav{
+    font-size: 1.5rem;
+}
+
+li.nav-item{
+    border-bottom: 2px solid rgba(200, 200, 180, 0.5);
+    padding: 10px 0;
+}
+
+li.nav-item:hover{
+    color: #fff;
 }

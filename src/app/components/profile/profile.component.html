@@ -3,37 +3,37 @@
 <div *ngIf='!isLoading' class="profile raised--noHover" @fade>   
     <div *ngIf='isLoggedIn();else login'>
         <div class="row">
-            <div class="d-none d-md-block col-md-2 raised--rightOnly">
+            <div class="d-none d-md-block bg-white col-md-3 raised--rightOnly">
                 <a class="h2 w-100 d-block py-3 text-center text-white bg-info" routerLink="usuario">
                     Hola {{ userInfo.firstName }} !
                 </a>
-                <ul class="list-group text-center list-group-flush">
-                    <li class="list-group-item">
+                <ul class="nav flex-column text-center">
+                    <li class="nav-item">
                         <a class="text-primary" routerLink="editar">
                             Actualizar Perfil
                         </a>
-                    </li>
-                    <li class="list-group-item">
+                    </li>                    
+                    <li class="nav-item">
                         <a class="text-primary" routerLink="encuesta/loggedInUser">
                             Encuesta
                         </a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="nav-item">
                         <a class="text-primary" routerLink='anuncios/mis_anuncios'>
                             Mis Anuncios
                         </a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="nav-item">
                         <a class="text-primary" routerLink="mensajes/mis_mensajes">
                             Mis Mensajes
                         </a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="nav-item">
                         <a class="text-primary" routerLink="mascotas/mis_mascotas">
                             Mis Mascotas
                         </a>
                     </li>
-                    <li class="list-group-item" *ngIf='userInfo.admin' routerLink="admin/pannel">
+                    <li class="nav-item" *ngIf='userInfo.admin' routerLink="admin/pannel">
                         <a class="text-primary">
                             Panel de Administrador
                         </a>
@@ -69,7 +69,7 @@
                 </div>
               </div>
             
-            <div class="col-sm-12 col-md-10" *ngIf="isLoggedIn()">                
+            <div class="col-sm-12 col-md-9" *ngIf="isLoggedIn()">                
                 
                <router-outlet></router-outlet>
                 
