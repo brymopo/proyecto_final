@@ -1,125 +1,131 @@
-<form @fade (submit)="onSubmit()" class="text-primary m-auto" [formGroup]='petPostForm'>
-    <div class="text-center">
-        <h1 *ngIf='mode==="create"' class="text-success">Añadir mascota</h1>
-        <h1 *ngIf='mode==="edit"' class="text-success">Editar</h1>
-        <hr>
-    </div>
-    <div class="form-group">
-        <label for="image">Imagen</label>
-        <input type="file" formControlName="image" id="image" class="form-control" (change)='prepareImage($event)'>
-        
-        <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
-        <app-image *ngIf='!previewURL' ></app-image>
-        
-    </div>
-    <div class="form-group">
-        <label for="name">
-            Nombre:
-        </label>
-        <input type="text"  id="name" formControlName="name" class="form-control" [value]='petPostForm.value.name'>
-    </div>    
-    <div class="form-group">
-        <label for="breed">
-            Raza:
-        </label>
-        <input type="text" id="breed" formControlName="breed" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="species">
-            Especie:
-        </label>
-        <select formControlName="species" id="species" class="form-control">
-            <option> -- Seleccionar -- </option>
-            <option value="cat">
-                Gato
-            </option>
-            <option value="dog">
-                Perro
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="gender">
-            Sexo:
-        </label>
-        <select formControlName="gender" id="gender" class="form-control" >
-            <option> -- Seleccionar -- </option>
-            <option value="male">
-                Macho
-            </option>
-            <option value="female">
-                Hembra
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="neutered">
-            Esterilizado?:
-        </label>        
-        <select formControlName="neutered" id="neutered" class="form-control">
-            <option> -- Seleccionar -- </option>
-            <option value="true">
-                Si
-            </option>
-            <option value="false">
-                No
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="vaccinated">
-            Vacunado?:
-        </label>
-        <select formControlName="vaccinated" id="vaccinated" class="form-control">
-            <option> -- Seleccionar -- </option>
-            <option value="true">
-                Si
-            </option>
-            <option value="false">
-                No
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="dob" class="col-12">
-            Fecha de Nacimiento (o edad aproximada):
-        </label>
-        <input type="date" formControlName="dob" id="dob">       
-    </div>
-    <div class="form-group">
-        <label for="country">
-            Pais
-        </label>
-        <input type="text" id="country" formControlName="country" class="form-control">        
-    </div>
-    <div class="form-group">
-        <label for="city">
-            Ciudad
-        </label>
-        <input type="text" id="city" formControlName="city" class="form-control">         
-    </div>
-    <div class="form-group">
-        <label for="province">
-            Estado/Provincia
-        </label>
-        <input type="text" id="province" formControlName="province" class="form-control">        
-    </div>    
-    <div class="form-group">
-        <label for="bio">
-            Cuentanos mas acerca de <span *ngIf="petPostForm?.value.name;else noName">{{petPostForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
-        </label>
-        <textarea formControlName="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>      
-    </div>
-
-    <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
+<section @fade class="my-5">
+    <form (submit)="onSubmit()" class="text-primary py-3 raised--noHover m-auto" [formGroup]='petPostForm'>
+        <div id="form-inner">
+            <div class="text-center">
+                <h1 *ngIf='mode==="create"' class="text-success">Añadir mascota</h1>
+                <h1 *ngIf='mode==="edit"' class="text-success">Editar</h1>
+                <hr>
+            </div>
+            <div class="form-group">
+                <label for="image">Imagen</label>
+                <input type="file" formControlName="image" id="image" class="form-control" (change)='prepareImage($event)'>
+                
+                <img *ngIf='previewURL' [src]='previewURL' alt="preview" #image class="img-fluid">
+                <app-image *ngIf='!previewURL' ></app-image>
+                
+            </div>
+            <div class="form-group">
+                <label for="name">
+                    Nombre:
+                </label>
+                <input type="text"  id="name" formControlName="name" class="form-control" [value]='petPostForm.value.name'>
+            </div>    
+            <div class="form-group">
+                <label for="breed">
+                    Raza:
+                </label>
+                <input type="text" id="breed" formControlName="breed" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="species">
+                    Especie:
+                </label>
+                <select formControlName="species" id="species" class="form-control">
+                    <option> -- Seleccionar -- </option>
+                    <option value="cat">
+                        Gato
+                    </option>
+                    <option value="dog">
+                        Perro
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gender">
+                    Sexo:
+                </label>
+                <select formControlName="gender" id="gender" class="form-control" >
+                    <option> -- Seleccionar -- </option>
+                    <option value="male">
+                        Macho
+                    </option>
+                    <option value="female">
+                        Hembra
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="neutered">
+                    Esterilizado?:
+                </label>        
+                <select formControlName="neutered" id="neutered" class="form-control">
+                    <option> -- Seleccionar -- </option>
+                    <option value="true">
+                        Si
+                    </option>
+                    <option value="false">
+                        No
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vaccinated">
+                    Vacunado?:
+                </label>
+                <select formControlName="vaccinated" id="vaccinated" class="form-control">
+                    <option> -- Seleccionar -- </option>
+                    <option value="true">
+                        Si
+                    </option>
+                    <option value="false">
+                        No
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dob" class="col-12">
+                    Fecha de Nacimiento (o edad aproximada):
+                </label>
+                <input type="date" formControlName="dob" id="dob">       
+            </div>
+            <div class="form-group">
+                <label for="country">
+                    Pais
+                </label>
+                <input type="text" id="country" formControlName="country" class="form-control">        
+            </div>
+            <div class="form-group">
+                <label for="city">
+                    Ciudad
+                </label>
+                <input type="text" id="city" formControlName="city" class="form-control">         
+            </div>
+            <div class="form-group">
+                <label for="province">
+                    Estado/Provincia
+                </label>
+                <input type="text" id="province" formControlName="province" class="form-control">        
+            </div>    
+            <div class="form-group">
+                <label for="bio">
+                    Cuentanos mas acerca de <span *ngIf="petPostForm?.value.name;else noName">{{petPostForm.value.name}}</span> <ng-template #noName> tu mascota</ng-template>
+                </label>
+                <textarea formControlName="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>      
+            </div>
     
-    <button *ngIf='!loading' class="btn btn-lg btn-primary mr-2">
-        <span *ngIf='mode==="create";else editPet'> Añadir mascota  </span>
-        <ng-template #editPet >Modificar mascota</ng-template> 
-    </button>
-    <app-loading-button class="mr-2" *ngIf='loading' [message]="'Procesando...'"></app-loading-button>
-    <a class="btn btn-lg btn-warning" [routerLink]="cancelLink">
-        Cancelar
-    </a>         
-</form>     
+            <app-feedback [injectClass]='"h3 text-danger text-center my-3"' [message]="errorMessage"></app-feedback>
+            
+            <div >
+                <button *ngIf='!loading' class="btn btn-lg btn-primary mr-2">
+                    <span *ngIf='mode==="create";else editPet'> Añadir mascota  </span>
+                    <ng-template #editPet >Modificar mascota</ng-template> 
+                </button>
+                <app-loading-button class="mr-2" *ngIf='loading' [message]="'Procesando...'"></app-loading-button>
+                <a class="btn btn-lg btn-warning" [routerLink]="cancelLink">
+                    Cancelar
+                </a> 
+            </div>        
+        </div>        
+    </form>
+</section>    
 

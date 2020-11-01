@@ -1,3 +1,14 @@
 form.text-primary{
     width: 60%;
 }
+
+#form-pet{
+    background: #fff;
+    width: 90%;
+    max-width: 700px;      
+}
+
+#form-inner{
+    width: 90%;
+    margin: auto;
+}
