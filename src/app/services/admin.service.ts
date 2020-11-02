@@ -30,19 +30,17 @@ export class AdminService{
     }
 
     isAdmin(){
-        //Because the User model does not have an admin property
+        //Because the User model can not have an admin property
         return this.userService.copyUserInfo().hasOwnProperty('admin');
     }
 
     deleteReportedAd(id:String){
         const deleteUrl = this.common.getUrl(`/admin/reported_ads/${id}/delete`);
-        this.http.delete<{success:Boolean,result:Ad[]}>(deleteUrl)
-        .subscribe(res=>{
-            if(res.success){
-                this.userService.updatedUserData('reportedAds',res.result);
-                alert('Se elimino el anuncio')
-            }
-        })
+        return this.http.delete<{success:Boolean,result:Ad[]}>(deleteUrl);        
+    }
+
+    removeFromReported(reportedAds:Ad[]){
+        this.userService.updatedUserData('reportedAds',reportedAds);
     }
     
 }

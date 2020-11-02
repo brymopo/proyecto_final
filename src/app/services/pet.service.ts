@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Common } from '../services/common';
 import { UserService } from './user.service';
 import { Pet } from '../models/pet';
+import { Ad } from '../models/ad';
 
 @Injectable({
   providedIn: 'root'

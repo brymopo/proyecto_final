@@ -126,18 +126,7 @@ export class AuthService implements OnInit{
 
     validateEmail(token:string){
         let url = this.common.getUrl(`/confirmation/${token}`);
-        return this.http.get<{success:boolean,result:string}>(url);
-        /* this.http.get<{success:boolean,result:any}>(url)
-        .subscribe(res=>{
-            if(res.success){
-                this.setLocalStorage(res.result);
-                alert('Gracias, tu correo ha sido confirmado!')
-                this.router.navigateByUrl('mi_perfil');    
-            }
-        },err=>{
-            alert(`Oops, ocurrio un error: ${err.error.result}`);
-            this.router.navigateByUrl('/');    
-        }) */
+        return this.http.get<{success:boolean,result:string}>(url);        
     }
     
     validate2FA(form){

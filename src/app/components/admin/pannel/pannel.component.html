@@ -11,7 +11,7 @@
                 Hay {{ reportedAds.length }} anuncios reportados
             </p>
             <li *ngFor='let ad of reportedAds'>
-                <a class="text-info" routerLink="../../anuncios/{{ ad._id }}">
+                <a class="text-info" routerLink="../../anuncios/todos/{{ ad._id }}">
                     Ver anuncio {{ ad._id  }}
                 </a>
             </li>

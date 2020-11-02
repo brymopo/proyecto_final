@@ -2,15 +2,22 @@
     <h1 *ngIf='!ad._id' class="text-warning text-center">
         No se pudo encontrar un anuncio con este ID. Por favor rectifica e intenta de nuevo
     </h1>
+    <app-feedback [injectClass]="'text-danger text-center'" [message]="errorMessage"></app-feedback>
     <div *ngIf='ad._id' class="container">
         <div class="d-flex justify-content-between my-2">
             <h1>{{ ad.pet.name }}</h1>
-            <button class="btn btn-outline-danger" *ngIf='!admin' (click)="onReport()">
+            <button class="btn btn-outline-danger" *ngIf='!admin && isLoggedIn()' (click)="onReport()">
                 Reportar Abuso
             </button>
-            <button class="btn btn-danger"  *ngIf='admin' class="btn btn-danger" (click)="deleteByAdmin(ad._id)">
-                Eliminar por Admin
+            <button [class.disabled]="adDeleted" class="btn btn-danger"  *ngIf='admin && !deleting' class="btn btn-danger" (click)="deleteByAdmin(ad._id)">
+                <span *ngIf='!adDeleted;else deleted'>
+                    Eliminar por Admin
+                </span> 
+                <ng-template #deleted>
+                    <span>Eliminado</span>
+                </ng-template>   
             </button>
+            <app-loading-button *ngIf="deleting" [message]="'Eliminando...'"></app-loading-button>
         </div>
         <div class="row">
             <div class="col-sm">
@@ -81,6 +88,9 @@
                         <strong>
                             * Debes iniciar sesion para poder enviar mensajes *
                         </strong>
+                        <a href="" class="btn btn-primary d-block w-25" routerLink="../../../iniciarsesion">
+                            Iniciar Sesion
+                        </a>
                     </p>
                     <p *ngIf='ownAd'>             
                         <strong>

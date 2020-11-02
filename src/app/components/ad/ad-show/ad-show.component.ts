@@ -21,6 +21,9 @@ export class AdShowComponent implements OnInit, OnDestroy{
     public loading:boolean;
     private adSub = new Subscription();
     public admin:Boolean;
+    public deleting = false;
+    public adDeleted = false;
+    public errorMessage="";
 
     constructor(private route:ActivatedRoute,
                 private adService:AdService,
@@ -55,7 +58,19 @@ export class AdShowComponent implements OnInit, OnDestroy{
     }
 
     deleteByAdmin(id:String){
-        this.adminService.deleteReportedAd(id);
+        if(this.adDeleted) return;
+        this.deleting = true;
+        this.adminService.deleteReportedAd(id).subscribe(res=>{
+            if(res.success){
+                this.deleting = false;
+                this.adDeleted = true;
+                this.adminService.removeFromReported(res.result);
+                alert('Se elimino el anuncio')
+            }            
+        },err=>{
+            this.deleting = false;
+            this.errorMessage = err.error.result;            
+        });
     }
 
     ngOnDestroy(){
