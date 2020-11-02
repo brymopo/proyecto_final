@@ -1,12 +1,12 @@
 
-<section @fade  *ngFor='let message of messages'>
+<section  *ngFor='let message of messages'>
     <div *ngIf='isUser(message.author);else external' class="d-flex justify-content-end my-2">
         <div class="bubble bg-success text-white my-1">
             <p  class="text-right">
                 {{ message.content }}
             </p>
             <p class="small text-right">
-                {{ message.timestamp }}
+                {{ formatDate(message.timestamp) }}
             </p>
         </div>        
     </div>
@@ -17,7 +17,7 @@
                 {{ message.content }}
             </p>
             <p class="small text-left">
-                {{ message.timestamp }}
+                {{ formatDate(message.timestamp) }}
             </p>
         </div>        
     </ng-template>

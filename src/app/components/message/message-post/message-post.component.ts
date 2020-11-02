@@ -18,6 +18,7 @@ export class MessagePostComponent implements OnInit, OnDestroy{
     public  messageSent = false;
     public isLoading = false;
     private authorID:String;
+    public msgContent:string;
 
     constructor(private socketService:SocketioService){
 
@@ -30,10 +31,13 @@ export class MessagePostComponent implements OnInit, OnDestroy{
         
         if(this.socketService.socket){
             console.log("There is already a socket connected!")
+        }else{
+            this.socketService.setupSocketConnection(this.authorID);
         }
 
         this.socketService.socket.on('message', (conv:Conversation)=>{
             this.isLoading = false;
+            this.msgContent = "";
         });
         console.log('featured conv on init..',this.conversation)
                            

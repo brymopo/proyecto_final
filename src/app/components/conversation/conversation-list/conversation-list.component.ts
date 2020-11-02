@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketioService } from '../../../services/socketio.service';
+import { UserService } from '../../../services/user.service';
 import { Conversation } from '../../../models/conversation';
 import { Message } from '../../../models/message';
 import { fade } from '../../../animation';
@@ -19,7 +20,8 @@ export class ConversationListComponent implements OnInit, OnDestroy{
 
     public conversationObject:any = {};
 
-    constructor(private socketService:SocketioService){
+    constructor(private socketService:SocketioService,
+                private userService:UserService){
 
     }
 
@@ -30,8 +32,9 @@ export class ConversationListComponent implements OnInit, OnDestroy{
 
         this.socketService.socket.on('onInit',(conversations:Conversation[])=>{
             this.conversations = conversations;
-
+            
             if(conversations.length){
+                
                 this.objectifyConv();
                 this.displayConversation(conversations[0]._id);
                 console.log('featured: ',this.conversation);
@@ -80,5 +83,6 @@ export class ConversationListComponent implements OnInit, OnDestroy{
         console.log('passing messages: ', this.conversationObject[id].messages);
         this.messages = this.conversationObject[id].messages;
         this.conversation = this.conversationObject[id];
-    }
+    }    
+    
 }

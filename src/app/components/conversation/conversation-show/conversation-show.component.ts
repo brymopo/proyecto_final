@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Message } from '../../../models/message';
 import { UserService } from '../../../services/user.service';
 import { fade } from '../../../animation';
+import * as moment from 'moment';
 
 @Component({
     selector:'app-conversation-show',
@@ -24,5 +25,9 @@ export class ConversationShowComponent implements OnInit{
 
     isUser(id){
         return id == this.userId
+    }
+
+    formatDate(timestamp){
+        return moment(timestamp).format('MM-DD-YYYY');
     }
 }

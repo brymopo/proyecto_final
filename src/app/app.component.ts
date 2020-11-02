@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 
 @Component({
@@ -46,7 +47,15 @@ export class AppComponent {
     this.lastPosition = currentPosition;
   }
 
-  constructor(private authService:AuthService){
+  @HostListener('window:load',['$event'])
+  onLoadHandler(event){
+    if(this.authService.isLoggedIn()){
+        this.userService.getUserData();
+    }
+  }
+
+  constructor(private authService:AuthService,
+              private userService:UserService){
     
   }
   
