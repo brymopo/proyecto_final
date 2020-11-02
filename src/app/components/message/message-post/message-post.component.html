@@ -1,4 +1,4 @@
-<form (submit)='onSubmit(newMessage)' #newMessage='ngForm'>
+<form (submit)='onSubmit(newMessage)' #newMessage='ngForm' *ngIf="!messageSent">
     <label for="message" class="d-block">
         <strong>
             Mensaje:
@@ -15,8 +15,9 @@
             <textarea name="content" id="message" class="form-control my-2" ngModel>
             </textarea>        
             
-            <button class="d-block btn btn-success">
+            <button *ngIf="!isLoading" class="d-block btn btn-success">
                 Enviar        
             </button>
+            <app-loading-button *ngIf="isLoading" [message]="'Enviando'"></app-loading-button>
         </div>    
 </form>

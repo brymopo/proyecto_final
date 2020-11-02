@@ -13,7 +13,10 @@ import { SocketioService } from '../../../services/socketio.service';
 
 export class MessagePostComponent implements OnInit, OnDestroy{
     @Input() pet:Pet;
-    @Input() conversation:Conversation;    
+    @Input() conversation:Conversation;
+    @Input() isAdShow:boolean; 
+    public  messageSent = false;
+    public isLoading = false;
     private authorID:String;
 
     constructor(private socketService:SocketioService){
@@ -29,6 +32,9 @@ export class MessagePostComponent implements OnInit, OnDestroy{
             console.log("There is already a socket connected!")
         }
 
+        this.socketService.socket.on('message', (conv:Conversation)=>{
+            this.isLoading = false;
+        });
         console.log('featured conv on init..',this.conversation)
                            
     }
@@ -45,7 +51,7 @@ export class MessagePostComponent implements OnInit, OnDestroy{
         message.content = form.value.content;
         message.timestamp = new Date();
         message.conversation = !this.conversation ? "" : this.conversation._id;
-
+        this.isLoading = true;
         this.socketService.sendMessage(message);        
     } 
     
