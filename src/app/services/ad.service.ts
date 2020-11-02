@@ -28,8 +28,7 @@ export class AdService{
     getOneAdPopulated(id:String){
         let showOneUrl = this.common.getUrl(`/ads/${id}`);
         return this.http.get<{success:Boolean,result:Ad}>(showOneUrl)
-        .subscribe(res=>{
-            console.log('response: ',res);
+        .subscribe(res=>{            
             if(res.success){
                 this.adSub.next(res.result);
             }
@@ -59,8 +58,7 @@ export class AdService{
     }
 
     createAd(form:Pet){
-        let createUrl = this.common.getUrl('/ads/create');
-        console.log(createUrl)
+        let createUrl = this.common.getUrl('/ads/create');        
         return this.http.post<{success:Boolean,result:Ad}>(createUrl,form);        
     }
 

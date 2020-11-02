@@ -39,11 +39,9 @@ export class AdPostComponent implements OnInit, OnDestroy{
             this.pets = this.userService.copyUserInfo().pets;            
             if(adId==='nuevo'){
                 this.mode = 'create';
-                this.ad = new Ad()
-                console.log(this.mode,' mode');
+                this.ad = new Ad();                
             }else{
-                this.mode = 'edit';
-                console.log(this.mode,' mode');
+                this.mode = 'edit';               
             }
         })
         

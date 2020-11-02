@@ -97,7 +97,7 @@ export class AuthService implements OnInit{
             username:form.username,
             password:form.password
         }
-        console.log('outgoing form: ',loginData);
+                
         const loginURL = this.common.getUrl('/users/login');
         
         return this.http.post<{success:boolean,result:any}>(loginURL,loginData);

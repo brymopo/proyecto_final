@@ -39,8 +39,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
             this.userService.getUserData();
             this.userSub = this.userService.getUserDataObservable()
             .subscribe((user:User)=>{
-                this.userInfo = user;
-                console.log("user info changed: ",user);
+                this.userInfo = user;                
                 this.isLoading = false;                
                 if(!this.userInfo.survey.length && !localStorage.getItem('dismissed')){
                     this.showAnnouncement = true;

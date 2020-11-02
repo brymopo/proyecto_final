@@ -53,10 +53,6 @@ const routes:Routes=[
         loadChildren: () => import('../modules/profile.module').then(m=>m.ProfileModule)
     },
     {
-        path:'acerca',
-        loadChildren:()=> import ('../modules/survey.module').then(m=>m.SurveyModule)
-    },
-    {
         path:'anuncios',
         loadChildren: ()=> import ('../modules/ad.module').then(m=>m.AdModule)
     },

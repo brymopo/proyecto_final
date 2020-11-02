@@ -47,8 +47,7 @@ export class AdListComponent implements OnInit, OnDestroy{
                 this.adSub = this.adService.getAllAdsAsObservable()
                 .subscribe((ads:Ad[])=>{
                     this.ads = ads;
-                    this.loading=false;
-                    console.log(ads)
+                    this.loading=false;                    
                 },err=>{
                     this.loading=false;
                     this.errorMessage = err.error.result;

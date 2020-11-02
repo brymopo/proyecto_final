@@ -24,8 +24,7 @@ export class PannelComponent implements OnInit, OnDestroy{
     ngOnInit(){
         
         this.userInfo = this.userService.copyUserInfo();
-        this.reportedAds = this.userInfo.reportedAds;
-        console.log('User info: ',this.userInfo);
+        this.reportedAds = this.userInfo.reportedAds;        
         this.userSub = this.userService.getUserDataObservable()
         .subscribe((admin:Admin)=>{
             

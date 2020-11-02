@@ -123,8 +123,7 @@ export class SurveyService {
     this.http.get<{success:Boolean,result:Survey}>(showUrl)
     .subscribe(res=>{
       if(res.success){        
-            this.survey = res.result;
-            console.log('Received survey: ', this.survey)
+            this.survey = res.result;            
             this.surveySub.next(this.survey);              
       }
     })

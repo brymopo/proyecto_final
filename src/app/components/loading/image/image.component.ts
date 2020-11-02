@@ -47,7 +47,7 @@ export class ImageComponent implements OnInit{
     }
 
     onLoad(event){
-        console.log('on load trigerred...')
+        
         if(!this.fullsize) {
 
             this.imageUrl = `url(${this.srcLink})`;            
@@ -61,7 +61,7 @@ export class ImageComponent implements OnInit{
     }
 
     onError(event){
-        console.log('on error triggered...')
+        
         this.showBlank = true;
         this.loadingDone = true; 
         this.loadError = true;      

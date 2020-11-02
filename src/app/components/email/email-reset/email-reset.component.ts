@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { fade } from '../../../animation';
 
-
-
 @Component({
   selector: 'app-email-reset',
   templateUrl: './email-reset.component.html',
   styleUrls: ['./email-reset.component.css'],
   animations:[fade]
 })
+
 export class EmailResetComponent implements OnInit {
   public isLoading = false;
   public errorMessage="";

@@ -45,8 +45,7 @@ export class PetPostComponent implements OnInit {
 
   constructor(private petService:PetService,
               private route:ActivatedRoute,
-              private formBuilder:FormBuilder){
-                console.log('constructor triggered.......')    
+              private formBuilder:FormBuilder){                   
                       
   }
 
@@ -180,12 +179,3 @@ export class PetPostComponent implements OnInit {
   }
 
 }
-
-
-/* .subscribe(res=>{
-  if(res.success){
-    this.userService.updatedUserData('pets',res.result);
-    alert('Mascota creada exitosamente');
-    this._router.navigateByUrl('/mi_perfil/mascotas/mis_mascotas');
-  }
-}) */

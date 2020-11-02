@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SocketioService } from '../../../services/socketio.service';
 import { UserService } from '../../../services/user.service';
 import { Conversation } from '../../../models/conversation';
@@ -12,7 +12,7 @@ import { fade } from '../../../animation';
     animations:[fade]
 })
 
-export class ConversationListComponent implements OnInit, OnDestroy{
+export class ConversationListComponent implements OnInit{
     public messages:Message[]=[];
     public conversation:Conversation;
     
@@ -36,8 +36,7 @@ export class ConversationListComponent implements OnInit, OnDestroy{
             if(conversations.length){
                 
                 this.objectifyConv();
-                this.displayConversation(conversations[0]._id);
-                console.log('featured: ',this.conversation);
+                this.displayConversation(conversations[0]._id);                
             }      
             
         });
@@ -52,22 +51,15 @@ export class ConversationListComponent implements OnInit, OnDestroy{
             this.displayConversation(conv._id);
         });
         
-        this.socketService.socket.on('message:new',id=>{
-            console.log('I was notified of a new message: ',id);
+        this.socketService.socket.on('message:new',id=>{            
             this.socketService.socket.emit('conv:get',id);
         })
 
         this.socketService.socket.on('conv:receive',conv=>{
             this.messages.push(conv);
-            alert("Someone just send a new message!!");
-            console.log(conv);
+            alert("Someone just send a new message!!");            
         })
-    }
-
-    ngOnDestroy(){
-        /* console.log('Start of onDestroy');
-        this.socketService.socket.disconnect(); */
-    }
+    }    
     
     onSubmit(form){
         this.socketService.sendMessage(form);
@@ -79,8 +71,7 @@ export class ConversationListComponent implements OnInit, OnDestroy{
         })
     }
 
-    displayConversation(id:string){
-        console.log('passing messages: ', this.conversationObject[id].messages);
+    displayConversation(id:string){        
         this.messages = this.conversationObject[id].messages;
         this.conversation = this.conversationObject[id];
     }    

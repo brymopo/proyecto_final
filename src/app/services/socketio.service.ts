@@ -14,8 +14,7 @@ export class SocketioService {
   setupSocketConnection(id:String){
     this.socket = io(environment.BASE_URL,{
       query:{userId:id}
-    });
-    console.log(this.socket);
+    });    
   }  
 
   sendMessage(form){
@@ -24,9 +23,7 @@ export class SocketioService {
         room:form.conversation,
         message:form
     };
-
-    this.socket.emit('message',JSON.stringify(interaction))
-    console.log('message sent: ',interaction)
+    this.socket.emit('message',JSON.stringify(interaction))    
   }
 
   returnConversations(){

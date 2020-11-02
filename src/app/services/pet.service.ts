@@ -27,8 +27,7 @@ export class PetService {
 
   createPet(form:FormData){    
 
-    let baseURL = this.common.getUrl('/pets/create');
-    console.log('received form: ',form);
+    let baseURL = this.common.getUrl('/pets/create');    
     return this.http.post<{success:Boolean,result:Pet[]}>(baseURL,form);
     
   }

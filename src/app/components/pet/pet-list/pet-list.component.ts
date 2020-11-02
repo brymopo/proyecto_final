@@ -48,8 +48,7 @@ export class PetListComponent implements OnInit, OnDestroy {
       }
     },err=>{
       this.deleting = "";
-      this.errorMessage = err.error.result;
-      
+      this.errorMessage = err.error.result;      
     });
   }
   

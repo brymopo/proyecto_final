@@ -10,8 +10,5 @@ export class LoadingModalComponent{
     @Input() id:string;
     @Input() toDelete:string;
     public isHidden=true;
-
-    onRemoveAd(event){
-        console.log('This is the event I got: ',event);
-    }
+    
 }

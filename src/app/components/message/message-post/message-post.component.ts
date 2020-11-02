@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pet } from '../../../models/pet';
 import { Message } from '../../../models/message';
 import { Conversation } from '../../../models/conversation';
@@ -11,7 +11,7 @@ import { SocketioService } from '../../../services/socketio.service';
     styleUrls:['./message-post.component.css']
 })
 
-export class MessagePostComponent implements OnInit, OnDestroy{
+export class MessagePostComponent implements OnInit{
     @Input() pet:Pet;
     @Input() conversation:Conversation;
     @Input() isAdShow:boolean; 
@@ -24,30 +24,19 @@ export class MessagePostComponent implements OnInit, OnDestroy{
 
     }
 
-    ngOnInit(){
-        console.log('on init message post')
-        console.log(this.pet);
+    ngOnInit(){        
         this.authorID = this.socketService.returnAuthorID(); 
         
-        if(this.socketService.socket){
-            console.log("There is already a socket connected!")
-        }else{
+        if(!this.socketService.socket){
             this.socketService.setupSocketConnection(this.authorID);
         }
 
         this.socketService.socket.on('message', (conv:Conversation)=>{
             this.isLoading = false;
-            this.msgContent = "";
+            this.msgContent = "";            
         });
-        console.log('featured conv on init..',this.conversation)
-                           
-    }
-
-    ngOnDestroy(){
-        /* console.log('Start of onDestroy - message post');
-        this.socketService.socket.disconnect(); */
-             
-    }
+                                   
+    }    
 
     onSubmit(form){
         let message = new Message();
