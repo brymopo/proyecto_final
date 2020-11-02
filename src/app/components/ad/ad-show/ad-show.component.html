@@ -83,7 +83,7 @@
                     {{ ad.pet.bio }}
                 </p>
 
-                <app-message-post *ngIf='isLoggedIn() && !ownAd;else login' [pet]="ad.pet"></app-message-post>
+                <app-message-post [isAdShow]="true" *ngIf='isLoggedIn() && !ownAd;else login' [pet]="ad.pet"></app-message-post>
                 <ng-template #login>
                     <h3>
                         Mensajes:

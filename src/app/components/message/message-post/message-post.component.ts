@@ -33,7 +33,10 @@ export class MessagePostComponent implements OnInit{
 
         this.socketService.socket.on('message', (conv:Conversation)=>{
             this.isLoading = false;
-            this.msgContent = "";            
+            this.msgContent = ""; 
+            if(this.isAdShow){
+                alert('Mensaje Enviado!')
+            }           
         });
                                    
     }    

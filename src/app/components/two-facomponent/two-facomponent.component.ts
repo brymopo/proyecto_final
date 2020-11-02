@@ -51,7 +51,7 @@ export class TwoFAComponentComponent implements OnInit {
       if(res.success){
         this.authService.setLocalStorage(res.result);
         this.authService.isLoggedIn();
-        this.router.navigateByUrl('mi_perfil');
+        this.router.navigateByUrl('mi_perfil/usuario');
       }
     },err=>{
       this.validating = false;
